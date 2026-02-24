@@ -17,23 +17,22 @@ export const metadata: Metadata = {
   title: 'Heights Streetscape Plan | City of Hood River',
   description:
     'Explore the Heights Streetscape Plan for the City of Hood River. Learn about upcoming street improvements, bike paths, pedestrian safety, and community projects in the Heights neighborhood.',
-  generator: 'v0.app',
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
+        url: '/placeholder-logo.png',
         media: '(prefers-color-scheme: light)',
       },
       {
-        url: '/icon-dark-32x32.png',
+        url: '/placeholder-logo.png',
         media: '(prefers-color-scheme: dark)',
       },
       {
-        url: '/icon.svg',
+        url: '/placeholder-logo.svg',
         type: 'image/svg+xml',
       },
     ],
-    apple: '/apple-icon.png',
+    apple: '/placeholder-logo.png',
   },
 }
 
