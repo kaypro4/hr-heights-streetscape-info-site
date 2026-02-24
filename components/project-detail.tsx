@@ -184,6 +184,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             {previousProject ? (
               <Link
                 href={`/project/${previousProject.slug}`}
+                scroll={false}
                 aria-label={`${t("project.sequencePrevious")}: ${previousProject[locale].name}`}
                 className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm"
               >
@@ -207,6 +208,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             {nextProject ? (
               <Link
                 href={`/project/${nextProject.slug}`}
+                scroll={false}
                 aria-label={`${t("project.sequenceNext")}: ${nextProject[locale].name}`}
                 className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm"
               >
@@ -224,6 +226,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
               {previousProject && (
                 <Link
                   href={`/project/${previousProject.slug}`}
+                  scroll={false}
                   aria-label={`${t("project.sequencePrevious")}: ${previousProject[locale].name}`}
                   className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
                 >
@@ -235,6 +238,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             {previousProject ? (
               <Link
                 href={`/project/${previousProject.slug}`}
+                scroll={false}
                 className="block rounded-md border border-border bg-background/80 p-2 transition-colors hover:border-primary/40 hover:bg-background"
               >
                 <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
@@ -267,6 +271,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             {nextProject ? (
               <Link
                 href={`/project/${nextProject.slug}`}
+                scroll={false}
                 className="block rounded-md border border-border bg-background/80 p-2 transition-colors hover:border-primary/40 hover:bg-background"
               >
                 <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
@@ -284,6 +289,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
               {nextProject && (
                 <Link
                   href={`/project/${nextProject.slug}`}
+                  scroll={false}
                   aria-label={`${t("project.sequenceNext")}: ${nextProject[locale].name}`}
                   className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
                 >
