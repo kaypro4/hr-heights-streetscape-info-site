@@ -24,6 +24,7 @@ export interface Project {
   image: string
   galleryImages: string[]
   timeline: TimelineStep[]
+  implementationOrder: number // 1-11, left to right from plan
   en: {
     name: string
     description: string
