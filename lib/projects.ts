@@ -2,6 +2,16 @@ import type { Locale } from "./i18n"
 
 export type ProjectCategory = "pedestrian" | "circulation" | "fillBlocks"
 
+export type TimelinePhase = "planning" | "design" | "permitting" | "construction" | "complete"
+
+export interface TimelineStep {
+  phase: TimelinePhase
+  en: string
+  es: string
+  status: "complete" | "active" | "upcoming"
+  year?: string
+}
+
 export interface Project {
   id: string
   slug: string
@@ -11,12 +21,16 @@ export interface Project {
   complexityLevel: number // 1-5
   streets: string[]
   intersections: string[]
+  image: string
+  galleryImages: string[]
+  timeline: TimelineStep[]
   en: {
     name: string
     description: string
     rationale: string
     features: string[]
     goals: string[]
+    statusSummary: string
   }
   es: {
     name: string
@@ -24,6 +38,7 @@ export interface Project {
     rationale: string
     features: string[]
     goals: string[]
+    statusSummary: string
   }
 }
 
@@ -38,6 +53,15 @@ export const projects: Project[] = [
     complexityLevel: 2,
     streets: ["13th Street"],
     intersections: ["13th & Taylor Ave", "13th & A Street"],
+    image: "/images/projects/east-west-crossings.jpg",
+    galleryImages: ["/images/projects/east-west-crossings.jpg"],
+    timeline: [
+      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
+      { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "active", year: "2025-2026" },
+      { phase: "permitting", en: "Permitting & Approvals", es: "Permisos y Aprobaciones", status: "upcoming", year: "2026" },
+      { phase: "construction", en: "Construction", es: "Construccion", status: "upcoming", year: "2027" },
+      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2027" },
+    ],
     en: {
       name: "Key East/West Crossings on 13th Street",
       description:
@@ -54,6 +78,7 @@ export const projects: Project[] = [
         "Calm Traffic & Improve Intersections",
         "Safe, Comfortable Streets for People",
       ],
+      statusSummary: "Currently in engineering design phase. Community input has been gathered. Construction expected to begin in 2027.",
     },
     es: {
       name: "Cruces Clave Este/Oeste en la Calle 13",
@@ -71,6 +96,7 @@ export const projects: Project[] = [
         "Calmar el Tr\u00e1fico y Mejorar Intersecciones",
         "Calles Seguras y C\u00f3modas para las Personas",
       ],
+      statusSummary: "Actualmente en fase de diseno de ingenieria. Se han recopilado los aportes de la comunidad. Se espera que la construccion comience en 2027.",
     },
   },
   {
@@ -82,6 +108,15 @@ export const projects: Project[] = [
     complexityLevel: 3,
     streets: ["Taylor Avenue", "12th Street"],
     intersections: ["12th & Taylor Ave", "13th & Taylor Ave", "12th & Pine St"],
+    image: "/images/projects/taylor-ave-connection.jpg",
+    galleryImages: ["/images/projects/taylor-ave-connection.jpg"],
+    timeline: [
+      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
+      { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "active", year: "2025-2026" },
+      { phase: "permitting", en: "Permitting & Approvals", es: "Permisos y Aprobaciones", status: "upcoming", year: "2026-2027" },
+      { phase: "construction", en: "Construction", es: "Construccion", status: "upcoming", year: "2027-2028" },
+      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2028" },
+    ],
     en: {
       name: "Taylor Avenue Neighborhood Connection",
       description:
@@ -100,6 +135,7 @@ export const projects: Project[] = [
         "Promote Livable Community & Economy",
         "Local Identity",
       ],
+      statusSummary: "In design phase with protected cycle track as key feature. Coordination with 12th Street interim improvements underway.",
     },
     es: {
       name: "Conexi\u00f3n Vecinal de Taylor Avenue",
@@ -119,6 +155,7 @@ export const projects: Project[] = [
         "Promover Comunidad y Econom\u00eda Habitable",
         "Identidad Local",
       ],
+      statusSummary: "En fase de diseno con la ciclovia protegida como caracteristica clave. Coordinacion con mejoras provisionales de la Calle 12 en curso.",
     },
   },
   {
@@ -130,6 +167,14 @@ export const projects: Project[] = [
     complexityLevel: 2,
     streets: ["13th Street"],
     intersections: [],
+    image: "/images/projects/east-sidewalk-13th.jpg",
+    galleryImages: ["/images/projects/east-sidewalk-13th.jpg"],
+    timeline: [
+      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
+      { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "upcoming", year: "2026-2027" },
+      { phase: "construction", en: "Construction", es: "Construccion", status: "upcoming", year: "2028" },
+      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2028" },
+    ],
     en: {
       name: "East Sidewalk Along 13th Street",
       description:
@@ -146,6 +191,7 @@ export const projects: Project[] = [
         "Safe, Comfortable Streets for People",
         "Calm Traffic & Improve Intersections",
       ],
+      statusSummary: "In planning phase. Design work expected to begin in 2026 after higher-priority 13th Street crossing improvements.",
     },
     es: {
       name: "Acera Este a lo Largo de la Calle 13",
@@ -163,6 +209,7 @@ export const projects: Project[] = [
         "Calles Seguras y C\u00f3modas para las Personas",
         "Calmar el Tr\u00e1fico y Mejorar Intersecciones",
       ],
+      statusSummary: "En fase de planificacion. Se espera que el diseno comience en 2026 despues de las mejoras de cruces prioritarios en la Calle 13.",
     },
   },
 
@@ -176,6 +223,15 @@ export const projects: Project[] = [
     complexityLevel: 4,
     streets: ["May Street", "13th Street"],
     intersections: ["13th & May St"],
+    image: "/images/projects/may-st-roundabout.jpg",
+    galleryImages: ["/images/projects/may-st-roundabout.jpg"],
+    timeline: [
+      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
+      { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "active", year: "2025-2026" },
+      { phase: "permitting", en: "Permitting & Approvals", es: "Permisos y Aprobaciones", status: "upcoming", year: "2026-2027" },
+      { phase: "construction", en: "Construction", es: "Construccion", status: "upcoming", year: "2027-2028" },
+      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2029" },
+    ],
     en: {
       name: "May Street and 13th Street Roundabout",
       description:
@@ -194,6 +250,7 @@ export const projects: Project[] = [
         "Safe, Comfortable Streets for People",
         "Promote Livable Community & Economy",
       ],
+      statusSummary: "High-priority project currently in engineering design. The roundabout can proceed independently of 13th Street two-way conversion.",
     },
     es: {
       name: "Rotonda de May Street y Calle 13",
@@ -213,6 +270,7 @@ export const projects: Project[] = [
         "Calles Seguras y C\u00f3modas para las Personas",
         "Promover Comunidad y Econom\u00eda Habitable",
       ],
+      statusSummary: "Proyecto de alta prioridad actualmente en diseno de ingenieria. La rotonda puede proceder independientemente de la conversion de la Calle 13.",
     },
   },
   {
@@ -224,6 +282,15 @@ export const projects: Project[] = [
     complexityLevel: 5,
     streets: ["Belmont Avenue", "12th Street", "13th Street"],
     intersections: ["12th & Belmont Ave", "13th & Belmont Ave"],
+    image: "/images/projects/belmont-12th-13th.jpg",
+    galleryImages: ["/images/projects/belmont-12th-13th.jpg"],
+    timeline: [
+      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
+      { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "upcoming", year: "2027-2028" },
+      { phase: "permitting", en: "Permitting & Approvals", es: "Permisos y Aprobaciones", status: "upcoming", year: "2028-2029" },
+      { phase: "construction", en: "Construction", es: "Construccion", status: "upcoming", year: "2029-2031" },
+      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2031" },
+    ],
     en: {
       name: "Belmont, 12th, and 13th Intersections & Two-Way Traffic",
       description:
@@ -245,6 +312,7 @@ export const projects: Project[] = [
         "Promote Livable Community & Economy",
         "Local Identity",
       ],
+      statusSummary: "The largest project in the plan. Currently in early planning. Design will begin after prerequisite projects are completed.",
     },
     es: {
       name: "Intersecciones de Belmont, Calle 12 y Calle 13 y Tr\u00e1fico de Dos Sentidos",
@@ -267,6 +335,7 @@ export const projects: Project[] = [
         "Promover Comunidad y Econom\u00eda Habitable",
         "Identidad Local",
       ],
+      statusSummary: "El proyecto mas grande del plan. Actualmente en planificacion temprana. El diseno comenzara despues de completar los proyectos previos.",
     },
   },
   {
@@ -278,6 +347,15 @@ export const projects: Project[] = [
     complexityLevel: 4,
     streets: ["May Street", "12th Street"],
     intersections: ["12th & May St"],
+    image: "/images/projects/may-st-safe-route.jpg",
+    galleryImages: ["/images/projects/may-st-safe-route.jpg"],
+    timeline: [
+      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
+      { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "active", year: "2025-2026" },
+      { phase: "permitting", en: "Permitting & Approvals", es: "Permisos y Aprobaciones", status: "upcoming", year: "2027" },
+      { phase: "construction", en: "Construction", es: "Construccion", status: "upcoming", year: "2027-2028" },
+      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2029" },
+    ],
     en: {
       name: "May Street Safe Route to School",
       description:
@@ -296,6 +374,7 @@ export const projects: Project[] = [
         "Calm Traffic & Improve Intersections",
         "Promote Livable Community & Economy",
       ],
+      statusSummary: "High-priority Safe Routes to School project in design. Extends the cycle track network to serve school access.",
     },
     es: {
       name: "Ruta Segura a la Escuela por May Street",
@@ -315,6 +394,7 @@ export const projects: Project[] = [
         "Calmar el Tr\u00e1fico y Mejorar Intersecciones",
         "Promover Comunidad y Econom\u00eda Habitable",
       ],
+      statusSummary: "Proyecto prioritario de Rutas Seguras a la Escuela en diseno. Extiende la red de ciclovias para el acceso escolar.",
     },
   },
   {
@@ -326,6 +406,15 @@ export const projects: Project[] = [
     complexityLevel: 5,
     streets: ["12th Street", "Pacific Avenue"],
     intersections: ["12th & Union St", "12th & Pacific Ave"],
+    image: "/images/projects/bike-connection-pacific.jpg",
+    galleryImages: ["/images/projects/bike-connection-pacific.jpg"],
+    timeline: [
+      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
+      { phase: "design", en: "Engineering Design & ODOT Coordination", es: "Diseno de Ingenieria y Coordinacion con ODOT", status: "upcoming", year: "2027-2028" },
+      { phase: "permitting", en: "Permitting & Approvals", es: "Permisos y Aprobaciones", status: "upcoming", year: "2028-2029" },
+      { phase: "construction", en: "Construction", es: "Construccion", status: "upcoming", year: "2029-2030" },
+      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2030" },
+    ],
     en: {
       name: "Bike Connection to Pacific Avenue",
       description:
@@ -343,6 +432,7 @@ export const projects: Project[] = [
         "Safe, Comfortable Streets for People",
         "Calm Traffic & Improve Intersections",
       ],
+      statusSummary: "Requires coordination with ODOT for jurisdictional transfer. Complex retaining wall construction needed. Design expected to begin in 2027.",
     },
     es: {
       name: "Conexi\u00f3n de Bicicletas a Pacific Avenue",
@@ -361,6 +451,7 @@ export const projects: Project[] = [
         "Calles Seguras y C\u00f3modas para las Personas",
         "Calmar el Tr\u00e1fico y Mejorar Intersecciones",
       ],
+      statusSummary: "Requiere coordinacion con ODOT para transferencia jurisdiccional. Se necesita construccion compleja de muro de contencion. Se espera que el diseno comience en 2027.",
     },
   },
 
@@ -374,6 +465,14 @@ export const projects: Project[] = [
     complexityLevel: 3,
     streets: ["A Street", "B Street", "C Street"],
     intersections: [],
+    image: "/images/projects/abc-streets.jpg",
+    galleryImages: ["/images/projects/abc-streets.jpg"],
+    timeline: [
+      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
+      { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "upcoming", year: "2027-2028" },
+      { phase: "construction", en: "Construction", es: "Construccion", status: "upcoming", year: "2029-2030" },
+      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2030" },
+    ],
     en: {
       name: "A, B, and C Streets",
       description:
@@ -392,6 +491,7 @@ export const projects: Project[] = [
         "Promote Livable Community & Economy",
         "Local Identity",
       ],
+      statusSummary: "In planning phase. One-way conversions will be coordinated with overall Heights traffic management improvements.",
     },
     es: {
       name: "Calles A, B y C",
@@ -411,6 +511,7 @@ export const projects: Project[] = [
         "Promover Comunidad y Econom\u00eda Habitable",
         "Identidad Local",
       ],
+      statusSummary: "En fase de planificacion. Las conversiones a un solo sentido se coordinaran con las mejoras generales de gestion del trafico de Heights.",
     },
   },
   {
@@ -427,6 +528,14 @@ export const projects: Project[] = [
       "12th & B St",
       "12th & C St",
       "12th & Taylor Ave",
+    ],
+    image: "/images/projects/12th-belmont-taylor.jpg",
+    galleryImages: ["/images/projects/12th-belmont-taylor.jpg"],
+    timeline: [
+      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
+      { phase: "design", en: "Phased Engineering Design", es: "Diseno de Ingenieria por Fases", status: "upcoming", year: "2027-2029" },
+      { phase: "construction", en: "Phased Construction", es: "Construccion por Fases", status: "upcoming", year: "2029-2032" },
+      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2032" },
     ],
     en: {
       name: "12th Street: Belmont Avenue to Taylor Avenue",
@@ -448,6 +557,7 @@ export const projects: Project[] = [
         "Safe, Comfortable Streets for People",
         "Calm Traffic & Improve Intersections",
       ],
+      statusSummary: "The heart of the Heights plan. Will be constructed in phases. Design will build on completed intersection and cycle track projects.",
     },
     es: {
       name: "Calle 12: Belmont Avenue a Taylor Avenue",
@@ -469,6 +579,7 @@ export const projects: Project[] = [
         "Calles Seguras y C\u00f3modas para las Personas",
         "Calmar el Tr\u00e1fico y Mejorar Intersecciones",
       ],
+      statusSummary: "El corazon del plan de Heights. Se construira en fases. El diseno se basara en los proyectos de interseccion y ciclovia completados.",
     },
   },
   {
@@ -480,6 +591,14 @@ export const projects: Project[] = [
     complexityLevel: 3,
     streets: ["12th Street"],
     intersections: ["12th & Taylor Ave", "12th & May St"],
+    image: "/images/projects/12th-taylor-may.jpg",
+    galleryImages: ["/images/projects/12th-taylor-may.jpg"],
+    timeline: [
+      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
+      { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "upcoming", year: "2028-2029" },
+      { phase: "construction", en: "Construction", es: "Construccion", status: "upcoming", year: "2030-2031" },
+      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2031" },
+    ],
     en: {
       name: "12th Street: Taylor Avenue to May Street",
       description:
@@ -497,6 +616,7 @@ export const projects: Project[] = [
         "Promote Livable Community & Economy",
         "Local Identity",
       ],
+      statusSummary: "In planning phase. Will extend the 12th Street improvements northward to connect Taylor Avenue and May Street sections.",
     },
     es: {
       name: "Calle 12: Taylor Avenue a May Street",
@@ -515,6 +635,7 @@ export const projects: Project[] = [
         "Promover Comunidad y Econom\u00eda Habitable",
         "Identidad Local",
       ],
+      statusSummary: "En fase de planificacion. Extendera las mejoras de la Calle 12 hacia el norte para conectar las secciones de Taylor Avenue y May Street.",
     },
   },
   {
@@ -526,6 +647,14 @@ export const projects: Project[] = [
     complexityLevel: 4,
     streets: ["Belmont Avenue"],
     intersections: ["12th & Belmont Ave", "13th & Belmont Ave"],
+    image: "/images/projects/belmont-shared-street.jpg",
+    galleryImages: ["/images/projects/belmont-shared-street.jpg"],
+    timeline: [
+      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
+      { phase: "design", en: "Design & Community Visioning", es: "Diseno y Vision Comunitaria", status: "upcoming", year: "2028-2029" },
+      { phase: "construction", en: "Construction", es: "Construccion", status: "upcoming", year: "2030-2031" },
+      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2031" },
+    ],
     en: {
       name: "Belmont Shared Street",
       description:
@@ -545,6 +674,7 @@ export const projects: Project[] = [
         "Promote Livable Community & Economy",
         "Safe, Comfortable Streets for People",
       ],
+      statusSummary: "Vision planning complete. Must follow key intersection improvements at Belmont Avenue. Will become a community gathering space with farmers markets.",
     },
     es: {
       name: "Calle Compartida de Belmont",
@@ -565,6 +695,7 @@ export const projects: Project[] = [
         "Promover Comunidad y Econom\u00eda Habitable",
         "Calles Seguras y C\u00f3modas para las Personas",
       ],
+      statusSummary: "Planificacion de vision completada. Debe seguir a las mejoras clave de interseccion en Belmont Avenue. Se convertira en un espacio de reunion comunitaria con mercados.",
     },
   },
 ]

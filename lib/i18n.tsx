@@ -57,6 +57,15 @@ const translations: Record<Locale, Translations> = {
     "complexity.medium": "Moderate Complexity",
     "complexity.high": "Higher Complexity",
 
+    // Timeline & Status
+    "project.timeline": "Timeline & Current Status",
+    "project.status": "Current Status",
+    "project.gallery": "Project Images",
+    "project.galleryClose": "Close Gallery",
+    "timeline.complete": "Complete",
+    "timeline.active": "In Progress",
+    "timeline.upcoming": "Upcoming",
+
     // Footer
     "footer.info": "This project is part of the Heights Streetscape Plan, initiated by the City of Hood River and Urban Renewal Agency (URA) to establish a comprehensive plan for improving streets and intersections in the Heights neighborhood.",
     "footer.adopted": "Plan adopted December 2023",
@@ -115,6 +124,15 @@ const translations: Record<Locale, Translations> = {
     "complexity.low": "Menor Complejidad",
     "complexity.medium": "Complejidad Moderada",
     "complexity.high": "Mayor Complejidad",
+
+    // Timeline & Status
+    "project.timeline": "Cronograma y Estado Actual",
+    "project.status": "Estado Actual",
+    "project.gallery": "Imagenes del Proyecto",
+    "project.galleryClose": "Cerrar Galeria",
+    "timeline.complete": "Completado",
+    "timeline.active": "En Progreso",
+    "timeline.upcoming": "Proximo",
 
     // Footer
     "footer.info": "Este proyecto es parte del Plan de Paisaje Urbano de Heights, iniciado por la Ciudad de Hood River y la Agencia de Renovaci\u00f3n Urbana (URA) para establecer un plan integral de mejora de calles e intersecciones en el vecindario Heights.",
