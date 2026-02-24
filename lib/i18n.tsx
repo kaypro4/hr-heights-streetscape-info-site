@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState, useCallback, type ReactNode } from "react"
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react"
 
 export type Locale = "en" | "es"
 
@@ -193,13 +193,31 @@ interface I18nContextType {
 }
 
 const I18nContext = createContext<I18nContextType | undefined>(undefined)
+const LOCALE_STORAGE_KEY = "heights-locale"
+
+function detectBrowserLocale(): Locale {
+  if (typeof navigator === "undefined") return "en"
+  const candidates = [...(navigator.languages ?? []), navigator.language]
+  const hasSpanish = candidates.some((lang) => lang?.toLowerCase().startsWith("es"))
+  return hasSpanish ? "es" : "en"
+}
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("en")
+  const [locale, setLocaleState] = useState<Locale>(() => {
+    if (typeof window === "undefined") return "en"
+    const saved = window.localStorage.getItem(LOCALE_STORAGE_KEY)
+    if (saved === "en" || saved === "es") return saved
+    return detectBrowserLocale()
+  })
+
+  useEffect(() => {
+    document.documentElement.lang = locale
+  }, [locale])
 
   const setLocale = useCallback((newLocale: Locale) => {
     setLocaleState(newLocale)
     document.documentElement.lang = newLocale
+    window.localStorage.setItem(LOCALE_STORAGE_KEY, newLocale)
   }, [])
 
   const t = useCallback(
