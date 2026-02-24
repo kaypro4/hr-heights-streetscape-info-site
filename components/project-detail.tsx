@@ -6,7 +6,6 @@ import Image from "next/image"
 import { useI18n } from "@/lib/i18n"
 import {
   type Project,
-  getCategoryLabel,
   projects,
 } from "@/lib/projects"
 import { Badge } from "@/components/ui/badge"
@@ -36,13 +35,6 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
   const [isImageOpen, setIsImageOpen] = useState(false)
   const { locale, t } = useI18n()
   const data = project[locale]
-  const categoryLabel = getCategoryLabel(project.category, locale)
-
-  const categoryColorMap: Record<string, string> = {
-    pedestrian: "bg-accent text-accent-foreground",
-    circulation: "bg-primary text-primary-foreground",
-    fillBlocks: "bg-secondary text-secondary-foreground",
-  }
 
   const complexityLabel =
     project.complexityLevel <= 2
@@ -88,19 +80,13 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
       {/* Project header */}
       <section className="bg-primary px-4 py-8 text-primary-foreground">
         <div className="mx-auto max-w-3xl">
-          <Badge
-            className={`${categoryColorMap[project.category]} mb-3`}
-            variant="secondary"
-          >
-            {categoryLabel}
-          </Badge>
           <h1 className="font-serif text-2xl font-bold leading-tight text-balance md:text-3xl">
             {data.name}
           </h1>
 
-          <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-4 grid gap-x-4 gap-y-2 border-t border-primary-foreground/20 pt-3 sm:grid-cols-2 lg:grid-cols-3">
             {project.streets.length > 0 && (
-              <div className="rounded-md border border-primary-foreground/20 bg-primary-foreground/10 px-3 py-2">
+              <div className="border-b border-primary-foreground/15 pb-2 sm:border-b-0 sm:pb-0">
                 <p className="text-[11px] uppercase tracking-wide text-primary-foreground/70">
                   {t("project.location")}
                 </p>
@@ -109,7 +95,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                 </p>
               </div>
             )}
-            <div className="rounded-md border border-primary-foreground/20 bg-primary-foreground/10 px-3 py-2">
+            <div className="border-b border-primary-foreground/15 pb-2 sm:border-b-0 sm:pb-0">
               <p className="text-[11px] uppercase tracking-wide text-primary-foreground/70">
                 {t("project.cost")}
               </p>
@@ -117,7 +103,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                 {project.costRange}
               </p>
             </div>
-            <div className="rounded-md border border-primary-foreground/20 bg-primary-foreground/10 px-3 py-2">
+            <div className="border-b border-primary-foreground/15 pb-2 sm:border-b-0 sm:pb-0">
               <p className="text-[11px] uppercase tracking-wide text-primary-foreground/70">
                 {t("project.currentStatus")}
               </p>
@@ -125,7 +111,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                 {currentStatusLabel}
               </p>
             </div>
-            <div className="rounded-md border border-primary-foreground/20 bg-primary-foreground/10 px-3 py-2">
+            <div className="border-b border-primary-foreground/15 pb-2 sm:border-b-0 sm:pb-0">
               <p className="text-[11px] uppercase tracking-wide text-primary-foreground/70">
                 {t("project.estimatedCompletion")}
               </p>
@@ -133,7 +119,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                 {estimatedCompletionLabel}
               </p>
             </div>
-            <div className="rounded-md border border-primary-foreground/20 bg-primary-foreground/10 px-3 py-2">
+            <div className="border-b border-primary-foreground/15 pb-2 sm:border-b-0 sm:pb-0">
               <p className="text-[11px] uppercase tracking-wide text-primary-foreground/70">
                 {t("project.priority")}
               </p>
@@ -153,7 +139,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                 ))}
               </div>
             </div>
-            <div className="rounded-md border border-primary-foreground/20 bg-primary-foreground/10 px-3 py-2">
+            <div>
               <p className="text-[11px] uppercase tracking-wide text-primary-foreground/70">
                 {t("project.complexity")}
               </p>
@@ -194,28 +180,19 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
               #{project.implementationOrder}/{orderedProjects.length}
             </span>
           </div>
-          <div className="grid gap-2 md:hidden">
+          <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2 md:hidden">
             {previousProject ? (
               <Link
                 href={`/project/${previousProject.slug}`}
-                className="block rounded-md border border-border bg-background/80 p-2 transition-colors hover:border-primary/40 hover:bg-background"
+                aria-label={`${t("project.sequencePrevious")}: ${previousProject[locale].name}`}
+                className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm"
               >
-                <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                  {t("project.sequencePrevious")}
-                </p>
-                <p className="text-sm font-medium leading-snug text-foreground/85">
-                  #{previousProject.implementationOrder} {previousProject[locale].name}
-                </p>
+                <ArrowLeft className="h-5 w-5" />
               </Link>
             ) : (
-              <div className="rounded-md border border-border bg-background/80 p-2">
-                <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                  {t("project.sequencePrevious")}
-                </p>
-                <p className="text-sm leading-snug text-muted-foreground">
-                  {t("project.sequenceStart")}
-                </p>
-              </div>
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-muted text-muted-foreground">
+                <ArrowLeft className="h-5 w-5" />
+              </span>
             )}
 
             <div className="rounded-md border border-primary/70 bg-primary/10 p-2">
@@ -227,18 +204,18 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
               </p>
             </div>
 
-            {nextProject && (
+            {nextProject ? (
               <Link
                 href={`/project/${nextProject.slug}`}
-                className="block rounded-md border border-border bg-background/80 p-2 transition-colors hover:border-primary/40 hover:bg-background"
+                aria-label={`${t("project.sequenceNext")}: ${nextProject[locale].name}`}
+                className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm"
               >
-                <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                  {t("project.sequenceNext")}
-                </p>
-                <p className="text-sm font-medium leading-snug text-foreground/85">
-                  #{nextProject.implementationOrder} {nextProject[locale].name}
-                </p>
+                <ArrowRight className="h-5 w-5" />
               </Link>
+            ) : (
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-muted text-muted-foreground">
+                <ArrowRight className="h-5 w-5" />
+              </span>
             )}
           </div>
 

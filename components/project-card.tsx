@@ -34,7 +34,7 @@ export function ProjectCard({ project, compact = false }: ProjectCardProps) {
 
   const categoryColorMap: Record<string, string> = {
     pedestrian: "bg-accent text-accent-foreground",
-    circulation: "bg-primary text-primary-foreground",
+    circulation: "bg-amber-300 text-amber-950",
     fillBlocks: "bg-secondary text-secondary-foreground",
   }
 
