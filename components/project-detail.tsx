@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useI18n } from "@/lib/i18n"
@@ -19,11 +20,13 @@ import {
 import {
   ArrowLeft,
   ArrowRight,
+  Expand,
   MapPin,
   DollarSign,
   CheckCircle2,
   Target,
   Wrench,
+  X,
 } from "lucide-react"
 
 interface ProjectDetailProps {
@@ -31,6 +34,7 @@ interface ProjectDetailProps {
 }
 
 export function ProjectDetail({ project }: ProjectDetailProps) {
+  const [isImageOpen, setIsImageOpen] = useState(false)
   const { locale, t } = useI18n()
   const data = project[locale]
   const categoryLabel = getCategoryLabel(project.category, locale)
@@ -47,6 +51,9 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
       : project.complexityLevel <= 3
         ? t("complexity.medium")
         : t("complexity.high")
+  const imageTagLabel = project.imageTag
+    ? t(`project.imageTag.${project.imageTag}`)
+    : ""
   const currentStatusLabel = t(`status.${project.currentStatus}`)
   const estimatedCompletionLabel = t(`completion.${project.estimatedCompletion}`)
 
@@ -188,7 +195,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
               #{project.implementationOrder}/{orderedProjects.length}
             </span>
           </div>
-          <div className="grid gap-2 md:grid-cols-3">
+          <div className="grid gap-2 md:hidden">
             {previousProject ? (
               <Link
                 href={`/project/${previousProject.slug}`}
@@ -197,13 +204,8 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                 <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
                   {t("project.sequencePrevious")}
                 </p>
-                <p className="flex items-start gap-1.5 text-sm font-medium leading-snug text-foreground/85">
-                  <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary">
-                    <ArrowLeft className="h-3.5 w-3.5" />
-                  </span>
-                  <span>
-                    #{previousProject.implementationOrder} {previousProject[locale].name}
-                  </span>
+                <p className="text-sm font-medium leading-snug text-foreground/85">
+                  #{previousProject.implementationOrder} {previousProject[locale].name}
                 </p>
               </Link>
             ) : (
@@ -234,16 +236,85 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                 <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
                   {t("project.sequenceNext")}
                 </p>
-                <p className="flex items-start gap-1.5 text-sm font-medium leading-snug text-foreground/85">
-                  <span>
-                    #{nextProject.implementationOrder} {nextProject[locale].name}
-                  </span>
-                  <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary">
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </span>
+                <p className="text-sm font-medium leading-snug text-foreground/85">
+                  #{nextProject.implementationOrder} {nextProject[locale].name}
                 </p>
               </Link>
             )}
+          </div>
+
+          <div className="hidden md:grid md:grid-cols-[auto_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_auto] md:items-stretch md:gap-2">
+            <div className="flex items-center justify-center">
+              {previousProject && (
+                <Link
+                  href={`/project/${previousProject.slug}`}
+                  aria-label={`${t("project.sequencePrevious")}: ${previousProject[locale].name}`}
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
+                >
+                  <ArrowLeft className="h-5 w-5" />
+                </Link>
+              )}
+            </div>
+
+            {previousProject ? (
+              <Link
+                href={`/project/${previousProject.slug}`}
+                className="block rounded-md border border-border bg-background/80 p-2 transition-colors hover:border-primary/40 hover:bg-background"
+              >
+                <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                  {t("project.sequencePrevious")}
+                </p>
+                <p className="text-sm font-medium leading-snug text-foreground/85">
+                  #{previousProject.implementationOrder} {previousProject[locale].name}
+                </p>
+              </Link>
+            ) : (
+              <div className="rounded-md border border-border bg-background/80 p-2">
+                <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                  {t("project.sequencePrevious")}
+                </p>
+                <p className="text-sm leading-snug text-muted-foreground">
+                  {t("project.sequenceStart")}
+                </p>
+              </div>
+            )}
+
+            <div className="rounded-md border border-primary/70 bg-primary/10 p-2">
+              <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-primary">
+                {t("project.sequenceCurrent")}
+              </p>
+              <p className="text-sm font-semibold leading-snug text-foreground">
+                #{project.implementationOrder} {data.name}
+              </p>
+            </div>
+
+            {nextProject ? (
+              <Link
+                href={`/project/${nextProject.slug}`}
+                className="block rounded-md border border-border bg-background/80 p-2 transition-colors hover:border-primary/40 hover:bg-background"
+              >
+                <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                  {t("project.sequenceNext")}
+                </p>
+                <p className="text-sm font-medium leading-snug text-foreground/85">
+                  #{nextProject.implementationOrder} {nextProject[locale].name}
+                </p>
+              </Link>
+            ) : (
+              <div />
+            )}
+
+            <div className="flex items-center justify-center">
+              {nextProject && (
+                <Link
+                  href={`/project/${nextProject.slug}`}
+                  aria-label={`${t("project.sequenceNext")}: ${nextProject[locale].name}`}
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
+                >
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -252,23 +323,62 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
         <section className="bg-card px-4 py-6">
           <div className="mx-auto max-w-3xl">
             <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-              {t("project.futureStateTitle")}
+              {t("project.imageTitle")}
             </h2>
             <div className="relative aspect-[16/9] overflow-hidden rounded-lg border border-border">
               <Image
                 src={project.image}
-                alt={`${data.name} - ${t("project.futureState")}`}
+                alt={imageTagLabel ? `${data.name} - ${imageTagLabel}` : data.name}
                 fill
                 priority
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 768px"
               />
-              <div className="absolute left-3 top-3 rounded bg-black/70 px-2.5 py-1 text-xs font-medium text-white">
-                {t("project.futureState")}
+              <button
+                type="button"
+                onClick={() => setIsImageOpen(true)}
+                className="absolute inset-0 cursor-zoom-in"
+                aria-label={`${t("project.imageExpand")}: ${data.name}`}
+              />
+              {imageTagLabel && (
+                <div className="absolute left-3 top-3 rounded bg-black/70 px-2.5 py-1 text-xs font-medium text-white">
+                  {imageTagLabel}
+                </div>
+              )}
+              <div className="pointer-events-none absolute bottom-3 right-3 rounded-full bg-black/70 p-1.5 text-white">
+                <Expand className="h-4 w-4" />
               </div>
             </div>
           </div>
         </section>
+      )}
+
+      {project.image && isImageOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4">
+          <button
+            type="button"
+            className="absolute inset-0"
+            onClick={() => setIsImageOpen(false)}
+            aria-label={t("project.imageClose")}
+          />
+          <div className="relative z-10 h-[85vh] w-full max-w-6xl">
+            <Image
+              src={project.image}
+              alt={imageTagLabel ? `${data.name} - ${imageTagLabel}` : data.name}
+              fill
+              className="object-contain"
+              sizes="100vw"
+            />
+          </div>
+          <button
+            type="button"
+            onClick={() => setIsImageOpen(false)}
+            className="absolute right-4 top-4 z-10 rounded-full bg-black/70 p-2 text-white hover:bg-black"
+            aria-label={t("project.imageClose")}
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
       )}
 
       {/* Details */}

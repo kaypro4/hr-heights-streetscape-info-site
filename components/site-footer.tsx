@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { useI18n } from "@/lib/i18n"
 import { MapPin } from "lucide-react"
 
@@ -24,6 +25,18 @@ export function SiteFooter() {
         </div>
         <p className="text-sm leading-relaxed text-muted-foreground mb-3">
           {t("footer.info")}
+        </p>
+        <p className="mb-3 rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-xs leading-relaxed text-amber-900">
+          {t("site.disclaimer")}{" "}
+          <Link
+            href="https://cityofhoodriver.gov/urban-renewal/heights/"
+            target="_blank"
+            rel="noreferrer"
+            className="font-semibold underline underline-offset-2"
+          >
+            {t("site.officialLinkLabel")}
+          </Link>
+          .
         </p>
         <div className="flex flex-col gap-1 text-xs text-muted-foreground">
           <p>{t("footer.adopted")}</p>

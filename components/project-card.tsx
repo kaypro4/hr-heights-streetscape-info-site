@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useI18n } from "@/lib/i18n"
@@ -14,7 +15,7 @@ import {
   CardFooter,
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, MapPin, DollarSign } from "lucide-react"
+import { ArrowRight, MapPin, DollarSign, Expand, X } from "lucide-react"
 
 interface ProjectCardProps {
   project: Project
@@ -22,9 +23,14 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, compact = false }: ProjectCardProps) {
+  const [isImageOpen, setIsImageOpen] = useState(false)
   const { locale, t } = useI18n()
   const data = project[locale]
   const categoryLabel = getCategoryLabel(project.category, locale)
+  const imageTagLabel = project.imageTag
+    ? t(`project.imageTag.${project.imageTag}`)
+    : ""
+  const estimatedCompletionLabel = t(`completion.${project.estimatedCompletion}`)
 
   const categoryColorMap: Record<string, string> = {
     pedestrian: "bg-accent text-accent-foreground",
@@ -66,7 +72,7 @@ export function ProjectCard({ project, compact = false }: ProjectCardProps) {
         {project.image ? (
           <Image
             src={project.image}
-            alt={`${data.name} - ${t("project.futureState")}`}
+            alt={imageTagLabel ? `${data.name} - ${imageTagLabel}` : data.name}
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 50vw"
@@ -80,13 +86,31 @@ export function ProjectCard({ project, compact = false }: ProjectCardProps) {
             sizes="(max-width: 768px) 100vw, 50vw"
           />
         )}
-        {project.image && (
+        {project.image && imageTagLabel && (
           <div className="absolute left-2 top-2 rounded bg-black/70 px-2 py-1 text-xs font-medium text-white">
-            {t("project.futureState")}
+            {imageTagLabel}
+          </div>
+        )}
+        {project.image && (
+          <button
+            type="button"
+            onClick={() => setIsImageOpen(true)}
+            className="absolute inset-0 cursor-zoom-in"
+            aria-label={`${t("project.imageExpand")}: ${data.name}`}
+          />
+        )}
+        {project.image && (
+          <div className="absolute right-2 top-2 rounded bg-black/70 px-2 py-1 text-xs font-medium text-white">
+            {estimatedCompletionLabel}
+          </div>
+        )}
+        {project.image && (
+          <div className="pointer-events-none absolute bottom-2 right-2 rounded-full bg-black/70 p-1.5 text-white">
+            <Expand className="h-4 w-4" />
           </div>
         )}
       </div>
-      <CardHeader>
+      <CardHeader className="pt-4">
         <div className="mb-2">
           <Badge
             className={categoryColorMap[project.category]}
@@ -137,6 +161,34 @@ export function ProjectCard({ project, compact = false }: ProjectCardProps) {
           </Link>
         </Button>
       </CardFooter>
+
+      {project.image && isImageOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4">
+          <button
+            type="button"
+            className="absolute inset-0"
+            onClick={() => setIsImageOpen(false)}
+            aria-label={t("project.imageClose")}
+          />
+          <div className="relative z-10 h-[85vh] w-full max-w-5xl">
+            <Image
+              src={project.image}
+              alt={imageTagLabel ? `${data.name} - ${imageTagLabel}` : data.name}
+              fill
+              className="object-contain"
+              sizes="100vw"
+            />
+          </div>
+          <button
+            type="button"
+            onClick={() => setIsImageOpen(false)}
+            className="absolute right-4 top-4 z-10 rounded-full bg-black/70 p-2 text-white hover:bg-black"
+            aria-label={t("project.imageClose")}
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+      )}
     </Card>
   )
 }
