@@ -3,6 +3,7 @@ import type { Locale } from "./i18n"
 export type ProjectCategory = "pedestrian" | "circulation" | "fillBlocks"
 export type ProjectStatus = "implementationDesign" | "conceptualDesign"
 export type EstimatedCompletion = "spring2027" | "tbd"
+export type ProjectImageTag = "futureRendering" | "example" | "currentState" | "design"
 
 export type TimelinePhase = "planning" | "design" | "permitting" | "construction" | "complete"
 
@@ -26,8 +27,8 @@ export interface Project {
   streets: string[]
   intersections: string[]
   image?: string
+  imageTag?: ProjectImageTag
   galleryImages?: string[]
-  timeline: TimelineStep[]
   implementationOrder: number // 1-11, left to right from plan
   en: {
     name: string
@@ -61,13 +62,9 @@ export const projects: Project[] = [
     implementationOrder: 1,
     currentStatus: "implementationDesign",
     estimatedCompletion: "spring2027",
-    timeline: [
-      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
-      { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "active", year: "2025-2026" },
-      { phase: "permitting", en: "Permitting & Approvals", es: "Permisos y Aprobaciones", status: "upcoming", year: "2026" },
-      { phase: "construction", en: "Construction", es: "Construccion", status: "upcoming", year: "2027" },
-      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2027" },
-    ],
+    image: "/images/projects/east-west-crossings-13th.png",
+    imageTag: "example",
+    galleryImages: ["/images/projects/east-west-crossings-13th.png"],
     en: {
       name: "Key East/West Crossings on 13th Street",
       description:
@@ -118,14 +115,8 @@ export const projects: Project[] = [
     currentStatus: "implementationDesign",
     estimatedCompletion: "spring2027",
     image: "/images/projects/taylor-ave-connection.png",
+    imageTag: "design",
     galleryImages: ["/images/projects/taylor-ave-connection.png"],
-    timeline: [
-      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
-      { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "active", year: "2025-2026" },
-      { phase: "permitting", en: "Permitting & Approvals", es: "Permisos y Aprobaciones", status: "upcoming", year: "2026-2027" },
-      { phase: "construction", en: "Construction", es: "Construccion", status: "upcoming", year: "2027-2028" },
-      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2028" },
-    ],
     en: {
       name: "Taylor Avenue Neighborhood Connection",
       description:
@@ -179,12 +170,6 @@ export const projects: Project[] = [
     implementationOrder: 3,
     currentStatus: "implementationDesign",
     estimatedCompletion: "spring2027",
-    timeline: [
-      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
-      { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "upcoming", year: "2026-2027" },
-      { phase: "construction", en: "Construction", es: "Construccion", status: "upcoming", year: "2028" },
-      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2028" },
-    ],
     en: {
       name: "East Sidewalk Along 13th Street",
       description:
@@ -237,14 +222,8 @@ export const projects: Project[] = [
     currentStatus: "conceptualDesign",
     estimatedCompletion: "tbd",
     image: "/images/projects/may-st-roundabout.png",
+    imageTag: "futureRendering",
     galleryImages: ["/images/projects/may-st-roundabout.png"],
-    timeline: [
-      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
-      { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "active", year: "2025-2026" },
-      { phase: "permitting", en: "Permitting & Approvals", es: "Permisos y Aprobaciones", status: "upcoming", year: "2026-2027" },
-      { phase: "construction", en: "Construction", es: "Construccion", status: "upcoming", year: "2027-2028" },
-      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2029" },
-    ],
     en: {
       name: "May Street and 13th Street Roundabout",
       description:
@@ -299,14 +278,8 @@ export const projects: Project[] = [
     currentStatus: "conceptualDesign",
     estimatedCompletion: "tbd",
     image: "/images/projects/belmont-12th-13th.png",
+    imageTag: "futureRendering",
     galleryImages: ["/images/projects/belmont-12th-13th.png"],
-    timeline: [
-      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
-      { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "upcoming", year: "2027-2028" },
-      { phase: "permitting", en: "Permitting & Approvals", es: "Permisos y Aprobaciones", status: "upcoming", year: "2028-2029" },
-      { phase: "construction", en: "Construction", es: "Construccion", status: "upcoming", year: "2029-2031" },
-      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2031" },
-    ],
     en: {
       name: "Belmont, 12th, and 13th Intersections & Two-Way Traffic",
       description:
@@ -366,13 +339,9 @@ export const projects: Project[] = [
     implementationOrder: 7,
     currentStatus: "conceptualDesign",
     estimatedCompletion: "tbd",
-    timeline: [
-      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
-      { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "active", year: "2025-2026" },
-      { phase: "permitting", en: "Permitting & Approvals", es: "Permisos y Aprobaciones", status: "upcoming", year: "2027" },
-      { phase: "construction", en: "Construction", es: "Construccion", status: "upcoming", year: "2027-2028" },
-      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2029" },
-    ],
+    image: "/images/projects/may-street-safe-route-to-school.png",
+    imageTag: "design",
+    galleryImages: ["/images/projects/may-street-safe-route-to-school.png"],
     en: {
       name: "May Street Safe Route to School",
       description:
@@ -426,13 +395,9 @@ export const projects: Project[] = [
     implementationOrder: 6,
     currentStatus: "conceptualDesign",
     estimatedCompletion: "tbd",
-    timeline: [
-      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
-      { phase: "design", en: "Engineering Design & ODOT Coordination", es: "Diseno de Ingenieria y Coordinacion con ODOT", status: "upcoming", year: "2027-2028" },
-      { phase: "permitting", en: "Permitting & Approvals", es: "Permisos y Aprobaciones", status: "upcoming", year: "2028-2029" },
-      { phase: "construction", en: "Construction", es: "Construccion", status: "upcoming", year: "2029-2030" },
-      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2030" },
-    ],
+    image: "/images/projects/bike-connection-pacific-avenue.png",
+    imageTag: "design",
+    galleryImages: ["/images/projects/bike-connection-pacific-avenue.png"],
     en: {
       name: "Bike Connection to Pacific Avenue",
       description:
@@ -486,12 +451,6 @@ export const projects: Project[] = [
     implementationOrder: 11,
     currentStatus: "conceptualDesign",
     estimatedCompletion: "tbd",
-    timeline: [
-      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
-      { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "upcoming", year: "2027-2028" },
-      { phase: "construction", en: "Construction", es: "Construccion", status: "upcoming", year: "2029-2030" },
-      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2030" },
-    ],
     en: {
       name: "A, B, and C Streets",
       description:
@@ -551,12 +510,9 @@ export const projects: Project[] = [
     implementationOrder: 8,
     currentStatus: "conceptualDesign",
     estimatedCompletion: "tbd",
-    timeline: [
-      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
-      { phase: "design", en: "Phased Engineering Design", es: "Diseno de Ingenieria por Fases", status: "upcoming", year: "2027-2029" },
-      { phase: "construction", en: "Phased Construction", es: "Construccion por Fases", status: "upcoming", year: "2029-2032" },
-      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2032" },
-    ],
+    image: "/images/projects/12th-street-belmont-to-taylor.png",
+    imageTag: "futureRendering",
+    galleryImages: ["/images/projects/12th-street-belmont-to-taylor.png"],
     en: {
       name: "12th Street: Belmont Avenue to Taylor Avenue",
       description:
@@ -614,12 +570,9 @@ export const projects: Project[] = [
     implementationOrder: 9,
     currentStatus: "conceptualDesign",
     estimatedCompletion: "tbd",
-    timeline: [
-      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
-      { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "upcoming", year: "2028-2029" },
-      { phase: "construction", en: "Construction", es: "Construccion", status: "upcoming", year: "2030-2031" },
-      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2031" },
-    ],
+    image: "/images/projects/12th-street-taylor-to-may.png",
+    imageTag: "futureRendering",
+    galleryImages: ["/images/projects/12th-street-taylor-to-may.png"],
     en: {
       name: "12th Street: Taylor Avenue to May Street",
       description:
@@ -672,13 +625,8 @@ export const projects: Project[] = [
     currentStatus: "conceptualDesign",
     estimatedCompletion: "tbd",
     image: "/images/projects/belmont-shared-street.png",
+    imageTag: "futureRendering",
     galleryImages: ["/images/projects/belmont-shared-street.png"],
-    timeline: [
-      { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
-      { phase: "design", en: "Design & Community Visioning", es: "Diseno y Vision Comunitaria", status: "upcoming", year: "2028-2029" },
-      { phase: "construction", en: "Construction", es: "Construccion", status: "upcoming", year: "2030-2031" },
-      { phase: "complete", en: "Project Complete", es: "Proyecto Completado", status: "upcoming", year: "2031" },
-    ],
     en: {
       name: "Belmont Shared Street",
       description:

@@ -13,6 +13,8 @@ const translations: Record<Locale, Translations> = {
     "site.title": "Heights Streetscape Plan",
     "site.subtitle": "City of Hood River",
     "site.tagline": "Building Better Streets Together",
+    "site.disclaimer": "This is not the official site. It is an exploratory tool to understand plan projects, status, and sequencing.",
+    "site.officialLinkLabel": "Official City of Hood River Heights page",
 
     // Navigation
     "nav.home": "All Projects",
@@ -48,8 +50,13 @@ const translations: Record<Locale, Translations> = {
     "project.sequenceNext": "Next",
     "project.sequenceStart": "Start of sequence",
     "project.sequenceEnd": "End of sequence",
-    "project.futureState": "Future State",
-    "project.futureStateTitle": "Future State Concept",
+    "project.imageTitle": "Project Image",
+    "project.imageExpand": "Expand image",
+    "project.imageClose": "Close image",
+    "project.imageTag.futureRendering": "Future Rendering",
+    "project.imageTag.example": "Example",
+    "project.imageTag.currentState": "Current State",
+    "project.imageTag.design": "Design",
 
     // Categories
     "category.pedestrian": "Pedestrian & Bicycle Improvements",
@@ -83,7 +90,7 @@ const translations: Record<Locale, Translations> = {
     // Footer
     "footer.info": "This project is part of the Heights Streetscape Plan, initiated by the City of Hood River and Urban Renewal Agency (URA) to establish a comprehensive plan for improving streets and intersections in the Heights neighborhood.",
     "footer.adopted": "Plan adopted December 2023",
-    "footer.contact": "For more information, contact TBD.",
+    "footer.contact": "For official information and contacts, use the link above.",
 
     // Language
     "lang.toggle": "Espa\u00f1ol",
@@ -94,6 +101,8 @@ const translations: Record<Locale, Translations> = {
     "site.title": "Plan de Paisaje Urbano de Heights",
     "site.subtitle": "Ciudad de Hood River",
     "site.tagline": "Construyendo Mejores Calles Juntos",
+    "site.disclaimer": "Este no es el sitio oficial. Es una herramienta exploratoria para comprender los proyectos del plan, su estado y secuencia.",
+    "site.officialLinkLabel": "Pagina oficial de Heights de la Ciudad de Hood River",
 
     // Navigation
     "nav.home": "Todos los Proyectos",
@@ -129,8 +138,13 @@ const translations: Record<Locale, Translations> = {
     "project.sequenceNext": "Siguiente",
     "project.sequenceStart": "Inicio de la secuencia",
     "project.sequenceEnd": "Fin de la secuencia",
-    "project.futureState": "Estado Futuro",
-    "project.futureStateTitle": "Concepto de Estado Futuro",
+    "project.imageTitle": "Imagen del Proyecto",
+    "project.imageExpand": "Ampliar imagen",
+    "project.imageClose": "Cerrar imagen",
+    "project.imageTag.futureRendering": "Representacion Futura",
+    "project.imageTag.example": "Ejemplo",
+    "project.imageTag.currentState": "Estado Actual",
+    "project.imageTag.design": "Diseno",
 
     // Categories
     "category.pedestrian": "Mejoras Peatonales y de Bicicletas",
@@ -164,7 +178,7 @@ const translations: Record<Locale, Translations> = {
     // Footer
     "footer.info": "Este proyecto es parte del Plan de Paisaje Urbano de Heights, iniciado por la Ciudad de Hood River y la Agencia de Renovaci\u00f3n Urbana (URA) para establecer un plan integral de mejora de calles e intersecciones en el vecindario Heights.",
     "footer.adopted": "Plan adoptado en diciembre de 2023",
-    "footer.contact": "Para m\u00e1s informaci\u00f3n, contacte TBD",
+    "footer.contact": "Para informacion y contactos oficiales, use el enlace de arriba.",
 
     // Language
     "lang.toggle": "English",
