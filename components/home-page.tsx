@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { useI18n } from "@/lib/i18n"
 import { projects, type ProjectCategory } from "@/lib/projects"
 import { ProjectCard } from "./project-card"
@@ -21,12 +22,22 @@ export function HomePage() {
   return (
     <div className="flex flex-col">
       {/* Hero */}
-      <section className="bg-primary px-4 py-10 text-primary-foreground">
-        <div className="mx-auto max-w-3xl">
+      <section className="relative overflow-hidden px-4 py-16 text-primary-foreground md:py-20">
+        <Image
+          src="/images/hero-heights.png"
+          alt="Heights Streetscape Plan future state rendering"
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-slate-900/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/60 via-slate-900/30 to-transparent" />
+        <div className="relative mx-auto max-w-3xl">
           <h1 className="font-serif text-3xl font-bold leading-tight text-balance md:text-4xl">
             {t("home.hero.title")}
           </h1>
-          <p className="mt-3 text-base leading-relaxed text-primary-foreground/85 text-pretty md:text-lg">
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-primary-foreground/90 text-pretty md:text-lg">
             {t("home.hero.subtitle")}
           </p>
         </div>

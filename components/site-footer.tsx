@@ -28,7 +28,6 @@ export function SiteFooter() {
         <div className="flex flex-col gap-1 text-xs text-muted-foreground">
           <p>{t("footer.adopted")}</p>
           <p>{t("footer.contact")}</p>
-          <p className="mt-2">{t("footer.accessibility")}</p>
         </div>
       </div>
     </footer>

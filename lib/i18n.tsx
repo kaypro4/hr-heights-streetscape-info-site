@@ -40,6 +40,9 @@ const translations: Record<Locale, Translations> = {
     "project.priority": "Community Priority",
     "project.otherProjects": "Other Projects in This Plan",
     "project.phase": "Implementation Phase",
+    "project.sequence": "Implementation Sequence",
+    "project.futureState": "Future State",
+    "project.futureStateTitle": "Future State Concept",
 
     // Categories
     "category.pedestrian": "Pedestrian & Bicycle Improvements",
@@ -69,8 +72,7 @@ const translations: Record<Locale, Translations> = {
     // Footer
     "footer.info": "This project is part of the Heights Streetscape Plan, initiated by the City of Hood River and Urban Renewal Agency (URA) to establish a comprehensive plan for improving streets and intersections in the Heights neighborhood.",
     "footer.adopted": "Plan adopted December 2023",
-    "footer.contact": "For more information, contact the City of Hood River Planning Department.",
-    "footer.accessibility": "This site is designed to be accessible to all visitors.",
+    "footer.contact": "For more information, contact TBD.",
 
     // Language
     "lang.toggle": "Espa\u00f1ol",
@@ -108,6 +110,9 @@ const translations: Record<Locale, Translations> = {
     "project.priority": "Prioridad Comunitaria",
     "project.otherProjects": "Otros Proyectos en Este Plan",
     "project.phase": "Fase de Implementaci\u00f3n",
+    "project.sequence": "Secuencia de Implementaci\u00f3n",
+    "project.futureState": "Estado Futuro",
+    "project.futureStateTitle": "Concepto de Estado Futuro",
 
     // Categories
     "category.pedestrian": "Mejoras Peatonales y de Bicicletas",
@@ -137,8 +142,7 @@ const translations: Record<Locale, Translations> = {
     // Footer
     "footer.info": "Este proyecto es parte del Plan de Paisaje Urbano de Heights, iniciado por la Ciudad de Hood River y la Agencia de Renovaci\u00f3n Urbana (URA) para establecer un plan integral de mejora de calles e intersecciones en el vecindario Heights.",
     "footer.adopted": "Plan adoptado en diciembre de 2023",
-    "footer.contact": "Para m\u00e1s informaci\u00f3n, contacte al Departamento de Planificaci\u00f3n de la Ciudad de Hood River.",
-    "footer.accessibility": "Este sitio est\u00e1 dise\u00f1ado para ser accesible a todos los visitantes.",
+    "footer.contact": "Para m\u00e1s informaci\u00f3n, contacte TBD",
 
     // Language
     "lang.toggle": "English",

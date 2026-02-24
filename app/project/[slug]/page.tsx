@@ -6,6 +6,8 @@ import { AppShell } from "@/components/app-shell"
 import { ProjectDetail } from "@/components/project-detail"
 import { getProjectBySlug } from "@/lib/projects"
 
+export const runtime = "edge"
+
 export default function ProjectPage({
   params,
 }: {

@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { useI18n } from "@/lib/i18n"
 import { type Project, getCategoryLabel } from "@/lib/projects"
 import { Badge } from "@/components/ui/badge"
@@ -60,7 +61,31 @@ export function ProjectCard({ project, compact = false }: ProjectCardProps) {
   }
 
   return (
-    <Card className="flex flex-col">
+    <Card className="flex flex-col overflow-hidden gap-0 p-0">
+      <div className="relative aspect-[4/3] overflow-hidden bg-muted/40">
+        {project.image ? (
+          <Image
+            src={project.image}
+            alt={`${data.name} - ${t("project.futureState")}`}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        ) : (
+          <Image
+            src="/placeholder.svg"
+            alt={`${data.name} placeholder`}
+            fill
+            className="object-contain p-8 opacity-70"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        )}
+        {project.image && (
+          <div className="absolute left-2 top-2 rounded bg-black/70 px-2 py-1 text-xs font-medium text-white">
+            {t("project.futureState")}
+          </div>
+        )}
+      </div>
       <CardHeader>
         <div className="mb-2">
           <Badge
@@ -104,7 +129,7 @@ export function ProjectCard({ project, compact = false }: ProjectCardProps) {
           </div>
         </div>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="pt-4 pb-6">
         <Button asChild variant="default" className="w-full">
           <Link href={`/project/${project.slug}`}>
             {t("nav.viewProject")}
