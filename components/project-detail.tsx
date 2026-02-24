@@ -16,9 +16,9 @@ import {
   CardTitle,
   CardContent,
 } from "@/components/ui/card"
-import { ProjectCard } from "./project-card"
 import {
   ArrowLeft,
+  ArrowRight,
   MapPin,
   DollarSign,
   CheckCircle2,
@@ -47,22 +47,23 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
       : project.complexityLevel <= 3
         ? t("complexity.medium")
         : t("complexity.high")
+  const currentStatusLabel = t(`status.${project.currentStatus}`)
+  const estimatedCompletionLabel = t(`completion.${project.estimatedCompletion}`)
 
-  const otherProjects = projects
-    .filter((p) => p.id !== project.id)
-    .slice(0, 4)
   const orderedProjects = [...projects].sort(
     (a, b) => a.implementationOrder - b.implementationOrder
   )
-  const stepsPerRow = 4
-  const timelineRows = Array.from(
-    { length: Math.ceil(orderedProjects.length / stepsPerRow) },
-    (_, rowIndex) =>
-      orderedProjects.slice(
-        rowIndex * stepsPerRow,
-        rowIndex * stepsPerRow + stepsPerRow
-      )
+  const currentProjectIndex = orderedProjects.findIndex(
+    (p) => p.id === project.id
   )
+  const previousProject =
+    currentProjectIndex > 0
+      ? orderedProjects[currentProjectIndex - 1]
+      : undefined
+  const nextProject =
+    currentProjectIndex < orderedProjects.length - 1
+      ? orderedProjects[currentProjectIndex + 1]
+      : undefined
 
   return (
     <div className="flex flex-col">
@@ -107,6 +108,25 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             </div>
           </div>
 
+          <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            <div className="rounded-md border border-primary-foreground/20 bg-primary-foreground/10 px-3 py-2">
+              <p className="text-[11px] uppercase tracking-wide text-primary-foreground/70">
+                {t("project.currentStatus")}
+              </p>
+              <p className="text-sm font-semibold text-primary-foreground">
+                {currentStatusLabel}
+              </p>
+            </div>
+            <div className="rounded-md border border-primary-foreground/20 bg-primary-foreground/10 px-3 py-2">
+              <p className="text-[11px] uppercase tracking-wide text-primary-foreground/70">
+                {t("project.estimatedCompletion")}
+              </p>
+              <p className="text-sm font-semibold text-primary-foreground">
+                {estimatedCompletionLabel}
+              </p>
+            </div>
+          </div>
+
           {/* Priority and complexity indicators */}
           <div className="mt-4 flex flex-wrap gap-6">
             <div>
@@ -141,83 +161,85 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
 
       <section className="border-b border-border bg-gradient-to-b from-card to-muted/20 px-4 py-4">
         <div className="mx-auto max-w-5xl">
-          <div className="mb-3 flex items-end justify-between gap-3">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-              {t("project.sequence")}
-            </h2>
-            <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
+          <h2 className="mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+            {t("project.sequence")}
+          </h2>
+          <div
+            className="mb-3 flex flex-wrap items-center justify-center gap-1.5"
+            aria-label={`Project ${project.implementationOrder} of ${orderedProjects.length}`}
+          >
+            {orderedProjects.map((p) => (
+              <span key={p.id} className="group relative inline-flex">
+                <span
+                  className={`h-3.5 w-3.5 rounded-full ${
+                    p.id === project.id
+                      ? "bg-primary ring-2 ring-primary/30"
+                      : p.implementationOrder < project.implementationOrder
+                        ? "bg-primary/60"
+                        : "bg-muted-foreground/35"
+                  }`}
+                />
+                <span className="pointer-events-none absolute -top-8 left-1/2 z-10 hidden -translate-x-1/2 whitespace-nowrap rounded bg-foreground px-2 py-1 text-[10px] font-medium text-background shadow-sm group-hover:block">
+                  {p[locale].name}
+                </span>
+              </span>
+            ))}
+            <span className="ml-1 rounded-full border border-border bg-background px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
               #{project.implementationOrder}/{orderedProjects.length}
             </span>
           </div>
-          <div className="space-y-3">
-            {timelineRows.map((row, rowIndex) => {
-              const isReverseRow = rowIndex % 2 === 1
-              const rowProjects = isReverseRow ? [...row].reverse() : row
+          <div className="grid gap-2 md:grid-cols-3">
+            {previousProject ? (
+              <Link
+                href={`/project/${previousProject.slug}`}
+                className="block rounded-md border border-border bg-background/80 p-2 transition-colors hover:border-primary/40 hover:bg-background"
+              >
+                <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                  {t("project.sequencePrevious")}
+                </p>
+                <p className="flex items-start gap-1.5 text-sm font-medium leading-snug text-foreground/85">
+                  <ArrowLeft className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                  <span>
+                    #{previousProject.implementationOrder} {previousProject[locale].name}
+                  </span>
+                </p>
+              </Link>
+            ) : (
+              <div className="rounded-md border border-border bg-background/80 p-2">
+                <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                  {t("project.sequencePrevious")}
+                </p>
+                <p className="text-sm leading-snug text-muted-foreground">
+                  {t("project.sequenceStart")}
+                </p>
+              </div>
+            )}
 
-              return (
-                <div key={rowIndex}>
-                  <ol
-                    className={`grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4 ${
-                      isReverseRow ? "lg:[direction:rtl]" : ""
-                    }`}
-                  >
-                    {rowProjects.map((p) => {
-                      const isCurrent = p.id === project.id
-                      const isComplete =
-                        p.implementationOrder < project.implementationOrder
-                      const markerClass = isCurrent
-                        ? "bg-primary ring-2 ring-primary/30"
-                        : isComplete
-                          ? "bg-primary/70"
-                          : "bg-muted-foreground/35"
-                      const stepLabelClass = isCurrent
-                        ? "text-primary"
-                        : isComplete
-                          ? "text-foreground/90"
-                          : "text-muted-foreground"
-                      const itemClass = isCurrent
-                        ? "border-primary/70 bg-primary/10 shadow-sm"
-                        : isComplete
-                          ? "border-primary/25 bg-background/90 hover:border-primary/40 hover:bg-background"
-                          : "border-border bg-background/80 hover:border-foreground/20 hover:bg-background"
+            <div className="rounded-md border border-primary/70 bg-primary/10 p-2">
+              <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-primary">
+                {t("project.sequenceCurrent")}
+              </p>
+              <p className="text-sm font-semibold leading-snug text-foreground">
+                #{project.implementationOrder} {data.name}
+              </p>
+            </div>
 
-                      return (
-                        <li
-                          key={p.id}
-                          className={isReverseRow ? "lg:[direction:ltr]" : ""}
-                        >
-                          <div className="mb-1 flex items-center gap-1.5">
-                            <span
-                              className={`h-2.5 w-2.5 rounded-full ${markerClass}`}
-                            />
-                            <span
-                              className={`text-[10px] font-semibold tracking-wide ${stepLabelClass}`}
-                            >
-                              #{p.implementationOrder}
-                            </span>
-                          </div>
-
-                          {isCurrent ? (
-                            <div
-                              className={`rounded-md border px-2.5 py-2 text-[11px] font-semibold leading-tight text-foreground line-clamp-2 ${itemClass}`}
-                            >
-                              {p[locale].name}
-                            </div>
-                          ) : (
-                            <Link
-                              href={`/project/${p.slug}`}
-                              className={`block rounded-md border px-2.5 py-2 text-[11px] leading-tight text-foreground/85 transition-all duration-200 hover:-translate-y-[1px] line-clamp-2 ${itemClass}`}
-                            >
-                              {p[locale].name}
-                            </Link>
-                          )}
-                        </li>
-                      )
-                    })}
-                  </ol>
-                </div>
-              )
-            })}
+            {nextProject && (
+              <Link
+                href={`/project/${nextProject.slug}`}
+                className="block rounded-md border border-border bg-background/80 p-2 transition-colors hover:border-primary/40 hover:bg-background"
+              >
+                <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                  {t("project.sequenceNext")}
+                </p>
+                <p className="flex items-start gap-1.5 text-sm font-medium leading-snug text-foreground/85">
+                  <span>
+                    #{nextProject.implementationOrder} {nextProject[locale].name}
+                  </span>
+                  <ArrowRight className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                </p>
+              </Link>
+            )}
           </div>
         </div>
       </section>
@@ -350,24 +372,13 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
         </div>
       </section>
 
-      {/* Other projects */}
       <section className="border-t border-border bg-card px-4 py-8">
         <div className="mx-auto max-w-3xl">
-          <h2 className="mb-4 text-lg font-semibold text-foreground">
-            {t("project.otherProjects")}
-          </h2>
-          <div className="grid gap-3 md:grid-cols-2">
-            {otherProjects.map((p) => (
-              <ProjectCard key={p.id} project={p} compact />
-            ))}
-          </div>
-          <div className="mt-4">
-            <Button asChild variant="outline" className="w-full">
-              <Link href="/">
-                {t("nav.home")}
-              </Link>
-            </Button>
-          </div>
+          <Button asChild variant="outline" className="w-full">
+            <Link href="/">
+              {t("nav.home")}
+            </Link>
+          </Button>
         </div>
       </section>
     </div>

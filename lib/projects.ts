@@ -1,6 +1,8 @@
 import type { Locale } from "./i18n"
 
 export type ProjectCategory = "pedestrian" | "circulation" | "fillBlocks"
+export type ProjectStatus = "implementationDesign" | "conceptualDesign"
+export type EstimatedCompletion = "spring2027" | "tbd"
 
 export type TimelinePhase = "planning" | "design" | "permitting" | "construction" | "complete"
 
@@ -19,6 +21,8 @@ export interface Project {
   costRange: string
   priorityLevel: number // 1-5
   complexityLevel: number // 1-5
+  currentStatus: ProjectStatus
+  estimatedCompletion: EstimatedCompletion
   streets: string[]
   intersections: string[]
   image?: string
@@ -55,6 +59,8 @@ export const projects: Project[] = [
     streets: ["13th Street"],
     intersections: ["13th & Taylor Ave", "13th & A Street"],
     implementationOrder: 1,
+    currentStatus: "implementationDesign",
+    estimatedCompletion: "spring2027",
     timeline: [
       { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
       { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "active", year: "2025-2026" },
@@ -109,6 +115,8 @@ export const projects: Project[] = [
     streets: ["Taylor Avenue", "12th Street"],
     intersections: ["12th & Taylor Ave", "13th & Taylor Ave", "12th & Pine St"],
     implementationOrder: 2,
+    currentStatus: "implementationDesign",
+    estimatedCompletion: "spring2027",
     image: "/images/projects/taylor-ave-connection.png",
     galleryImages: ["/images/projects/taylor-ave-connection.png"],
     timeline: [
@@ -169,6 +177,8 @@ export const projects: Project[] = [
     streets: ["13th Street"],
     intersections: [],
     implementationOrder: 3,
+    currentStatus: "implementationDesign",
+    estimatedCompletion: "spring2027",
     timeline: [
       { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
       { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "upcoming", year: "2026-2027" },
@@ -224,6 +234,8 @@ export const projects: Project[] = [
     streets: ["May Street", "13th Street"],
     intersections: ["13th & May St"],
     implementationOrder: 4,
+    currentStatus: "conceptualDesign",
+    estimatedCompletion: "tbd",
     image: "/images/projects/may-st-roundabout.png",
     galleryImages: ["/images/projects/may-st-roundabout.png"],
     timeline: [
@@ -284,6 +296,8 @@ export const projects: Project[] = [
     streets: ["Belmont Avenue", "12th Street", "13th Street"],
     intersections: ["12th & Belmont Ave", "13th & Belmont Ave"],
     implementationOrder: 5,
+    currentStatus: "conceptualDesign",
+    estimatedCompletion: "tbd",
     image: "/images/projects/belmont-12th-13th.png",
     galleryImages: ["/images/projects/belmont-12th-13th.png"],
     timeline: [
@@ -350,6 +364,8 @@ export const projects: Project[] = [
     streets: ["May Street", "12th Street"],
     intersections: ["12th & May St"],
     implementationOrder: 7,
+    currentStatus: "conceptualDesign",
+    estimatedCompletion: "tbd",
     timeline: [
       { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
       { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "active", year: "2025-2026" },
@@ -408,6 +424,8 @@ export const projects: Project[] = [
     streets: ["12th Street", "Pacific Avenue"],
     intersections: ["12th & Union St", "12th & Pacific Ave"],
     implementationOrder: 6,
+    currentStatus: "conceptualDesign",
+    estimatedCompletion: "tbd",
     timeline: [
       { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
       { phase: "design", en: "Engineering Design & ODOT Coordination", es: "Diseno de Ingenieria y Coordinacion con ODOT", status: "upcoming", year: "2027-2028" },
@@ -466,6 +484,8 @@ export const projects: Project[] = [
     streets: ["A Street", "B Street", "C Street"],
     intersections: [],
     implementationOrder: 11,
+    currentStatus: "conceptualDesign",
+    estimatedCompletion: "tbd",
     timeline: [
       { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
       { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "upcoming", year: "2027-2028" },
@@ -529,6 +549,8 @@ export const projects: Project[] = [
       "12th & Taylor Ave",
     ],
     implementationOrder: 8,
+    currentStatus: "conceptualDesign",
+    estimatedCompletion: "tbd",
     timeline: [
       { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
       { phase: "design", en: "Phased Engineering Design", es: "Diseno de Ingenieria por Fases", status: "upcoming", year: "2027-2029" },
@@ -590,6 +612,8 @@ export const projects: Project[] = [
     streets: ["12th Street"],
     intersections: ["12th & Taylor Ave", "12th & May St"],
     implementationOrder: 9,
+    currentStatus: "conceptualDesign",
+    estimatedCompletion: "tbd",
     timeline: [
       { phase: "planning", en: "Community Input & Planning", es: "Aportes Comunitarios y Planificacion", status: "complete", year: "2023" },
       { phase: "design", en: "Engineering Design", es: "Diseno de Ingenieria", status: "upcoming", year: "2028-2029" },
@@ -645,6 +669,8 @@ export const projects: Project[] = [
     streets: ["Belmont Avenue"],
     intersections: ["12th & Belmont Ave", "13th & Belmont Ave"],
     implementationOrder: 10,
+    currentStatus: "conceptualDesign",
+    estimatedCompletion: "tbd",
     image: "/images/projects/belmont-shared-street.png",
     galleryImages: ["/images/projects/belmont-shared-street.png"],
     timeline: [
