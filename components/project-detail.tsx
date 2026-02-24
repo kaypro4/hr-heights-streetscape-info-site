@@ -22,7 +22,6 @@ import {
   ArrowRight,
   Expand,
   MapPin,
-  DollarSign,
   CheckCircle2,
   Target,
   Wrench,
@@ -99,23 +98,25 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             {data.name}
           </h1>
 
-          {/* Location and cost */}
-          <div className="mt-4 flex flex-wrap gap-4">
+          <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {project.streets.length > 0 && (
-              <div className="flex items-center gap-1.5 text-sm text-primary-foreground/85">
-                <MapPin className="h-4 w-4" />
-                <span>{project.streets.join(", ")}</span>
+              <div className="rounded-md border border-primary-foreground/20 bg-primary-foreground/10 px-3 py-2">
+                <p className="text-[11px] uppercase tracking-wide text-primary-foreground/70">
+                  {t("project.location")}
+                </p>
+                <p className="text-sm font-semibold leading-snug text-primary-foreground">
+                  {project.streets.join(", ")}
+                </p>
               </div>
             )}
-            <div className="flex items-center gap-1.5 text-sm text-primary-foreground/85">
-              <DollarSign className="h-4 w-4" />
-              <span>
-                {t("project.cost")}: {project.costRange}
-              </span>
+            <div className="rounded-md border border-primary-foreground/20 bg-primary-foreground/10 px-3 py-2">
+              <p className="text-[11px] uppercase tracking-wide text-primary-foreground/70">
+                {t("project.cost")}
+              </p>
+              <p className="text-sm font-semibold text-primary-foreground">
+                {project.costRange}
+              </p>
             </div>
-          </div>
-
-          <div className="mt-3 grid gap-2 sm:grid-cols-2">
             <div className="rounded-md border border-primary-foreground/20 bg-primary-foreground/10 px-3 py-2">
               <p className="text-[11px] uppercase tracking-wide text-primary-foreground/70">
                 {t("project.currentStatus")}
@@ -132,14 +133,10 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                 {estimatedCompletionLabel}
               </p>
             </div>
-          </div>
-
-          {/* Priority and complexity indicators */}
-          <div className="mt-4 flex flex-wrap gap-6">
-            <div>
-              <span className="text-xs text-primary-foreground/70">
+            <div className="rounded-md border border-primary-foreground/20 bg-primary-foreground/10 px-3 py-2">
+              <p className="text-[11px] uppercase tracking-wide text-primary-foreground/70">
                 {t("project.priority")}
-              </span>
+              </p>
               <div
                 className="mt-1 flex gap-1"
                 aria-label={`Priority level ${project.priorityLevel} of 5`}
@@ -156,11 +153,13 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                 ))}
               </div>
             </div>
-            <div>
-              <span className="text-xs text-primary-foreground/70">
+            <div className="rounded-md border border-primary-foreground/20 bg-primary-foreground/10 px-3 py-2">
+              <p className="text-[11px] uppercase tracking-wide text-primary-foreground/70">
                 {t("project.complexity")}
-              </span>
-              <p className="mt-1 text-sm font-medium">{complexityLabel}</p>
+              </p>
+              <p className="text-sm font-semibold text-primary-foreground">
+                {complexityLabel}
+              </p>
             </div>
           </div>
         </div>
