@@ -160,8 +160,8 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
       </section>
 
       <section className="border-b border-border bg-gradient-to-b from-card to-muted/20 px-4 py-4">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="mb-2 text-center text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
             {t("project.sequence")}
           </h2>
           <div
@@ -198,7 +198,9 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                   {t("project.sequencePrevious")}
                 </p>
                 <p className="flex items-start gap-1.5 text-sm font-medium leading-snug text-foreground/85">
-                  <ArrowLeft className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                  <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary">
+                    <ArrowLeft className="h-3.5 w-3.5" />
+                  </span>
                   <span>
                     #{previousProject.implementationOrder} {previousProject[locale].name}
                   </span>
@@ -236,7 +238,9 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                   <span>
                     #{nextProject.implementationOrder} {nextProject[locale].name}
                   </span>
-                  <ArrowRight className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                  <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary">
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
                 </p>
               </Link>
             )}
