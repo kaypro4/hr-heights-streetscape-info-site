@@ -27,6 +27,7 @@ export interface Project {
   streets: string[]
   intersections: string[]
   image?: string
+  sitemapImage?: string
   imageTag?: ProjectImageTag
   galleryImages?: string[]
   implementationOrder: number // 1-11, left to right from plan
@@ -62,6 +63,7 @@ export const projects: Project[] = [
     implementationOrder: 1,
     currentStatus: "implementationDesign",
     estimatedCompletion: "spring2027",
+    sitemapImage: "/images/projects/project-1-sitemap.png",
     image: "/images/projects/east-west-crossings-13th.png",
     imageTag: "example",
     galleryImages: ["/images/projects/east-west-crossings-13th.png"],
@@ -114,6 +116,7 @@ export const projects: Project[] = [
     implementationOrder: 2,
     currentStatus: "implementationDesign",
     estimatedCompletion: "spring2027",
+    sitemapImage: "/images/projects/project-2-sitemap.png",
     image: "/images/projects/taylor-ave-connection.png",
     imageTag: "design",
     galleryImages: ["/images/projects/taylor-ave-connection.png"],
@@ -170,6 +173,7 @@ export const projects: Project[] = [
     implementationOrder: 3,
     currentStatus: "implementationDesign",
     estimatedCompletion: "spring2027",
+    sitemapImage: "/images/projects/project-3-sitemap.png",
     en: {
       name: "East Sidewalk Along 13th Street",
       description:
@@ -221,6 +225,7 @@ export const projects: Project[] = [
     implementationOrder: 4,
     currentStatus: "conceptualDesign",
     estimatedCompletion: "tbd",
+    sitemapImage: "/images/projects/project-4-sitemap.png",
     image: "/images/projects/may-st-roundabout.png",
     imageTag: "futureRendering",
     galleryImages: ["/images/projects/may-st-roundabout.png"],
@@ -277,6 +282,7 @@ export const projects: Project[] = [
     implementationOrder: 5,
     currentStatus: "conceptualDesign",
     estimatedCompletion: "tbd",
+    sitemapImage: "/images/projects/project-5-sitemap.png",
     image: "/images/projects/belmont-12th-13th.png",
     imageTag: "futureRendering",
     galleryImages: ["/images/projects/belmont-12th-13th.png"],
@@ -339,6 +345,7 @@ export const projects: Project[] = [
     implementationOrder: 7,
     currentStatus: "conceptualDesign",
     estimatedCompletion: "tbd",
+    sitemapImage: "/images/projects/project-7-sitemap.png",
     image: "/images/projects/may-street-safe-route-to-school.png",
     imageTag: "design",
     galleryImages: ["/images/projects/may-street-safe-route-to-school.png"],
@@ -395,6 +402,7 @@ export const projects: Project[] = [
     implementationOrder: 6,
     currentStatus: "conceptualDesign",
     estimatedCompletion: "tbd",
+    sitemapImage: "/images/projects/project-6-sitemap.png",
     image: "/images/projects/bike-connection-pacific-avenue.png",
     imageTag: "design",
     galleryImages: ["/images/projects/bike-connection-pacific-avenue.png"],
@@ -451,6 +459,7 @@ export const projects: Project[] = [
     implementationOrder: 11,
     currentStatus: "conceptualDesign",
     estimatedCompletion: "tbd",
+    sitemapImage: "/images/projects/project-11-sitemap.png",
     en: {
       name: "A, B, and C Streets",
       description:
@@ -510,6 +519,7 @@ export const projects: Project[] = [
     implementationOrder: 8,
     currentStatus: "conceptualDesign",
     estimatedCompletion: "tbd",
+    sitemapImage: "/images/projects/project-8-sitemap.png",
     image: "/images/projects/12th-street-belmont-to-taylor.png",
     imageTag: "futureRendering",
     galleryImages: ["/images/projects/12th-street-belmont-to-taylor.png"],
@@ -570,6 +580,7 @@ export const projects: Project[] = [
     implementationOrder: 9,
     currentStatus: "conceptualDesign",
     estimatedCompletion: "tbd",
+    sitemapImage: "/images/projects/project-9-sitemap.png",
     image: "/images/projects/12th-street-taylor-to-may.png",
     imageTag: "futureRendering",
     galleryImages: ["/images/projects/12th-street-taylor-to-may.png"],
@@ -624,6 +635,7 @@ export const projects: Project[] = [
     implementationOrder: 10,
     currentStatus: "conceptualDesign",
     estimatedCompletion: "tbd",
+    sitemapImage: "/images/projects/project-10-sitemap.png",
     image: "/images/projects/belmont-shared-street.png",
     imageTag: "futureRendering",
     galleryImages: ["/images/projects/belmont-shared-street.png"],

@@ -101,13 +101,22 @@ export function HomePage() {
                 href={`/project/${project.slug}`}
                 className="group flex items-start gap-2.5 rounded-lg border border-border bg-background px-2.5 py-2.5 transition-colors hover:border-primary/40 hover:bg-accent/40 sm:items-center sm:gap-3 sm:px-3"
               >
-                <div className="relative h-12 w-16 shrink-0 overflow-hidden rounded border border-border bg-muted/40 sm:h-14 sm:w-20">
+                <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded border border-border bg-muted/40 sm:h-24 sm:w-36">
                   <Image
                     src={project.image ?? "/placeholder.svg"}
                     alt={project[locale].name}
                     fill
                     className={project.image ? "object-cover" : "object-contain p-1"}
-                    sizes="(max-width: 640px) 64px, 80px"
+                    sizes="(max-width: 640px) 112px, 144px"
+                  />
+                </div>
+                <div className="relative h-20 w-12 shrink-0 overflow-hidden rounded border border-border bg-muted/25 sm:h-24 sm:w-16">
+                  <Image
+                    src={project.sitemapImage ?? "/placeholder.svg"}
+                    alt={`${project[locale].name} ${t("project.sitemapTitle").toLowerCase()}`}
+                    fill
+                    className={project.sitemapImage ? "object-contain p-0.5" : "object-contain p-1"}
+                    sizes="(max-width: 640px) 48px, 64px"
                   />
                 </div>
                 <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-muted text-[11px] font-semibold text-foreground sm:h-7 sm:w-7 sm:text-xs">

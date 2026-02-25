@@ -20,6 +20,7 @@ const translations: Record<Locale, Translations> = {
     "nav.home": "All Projects",
     "nav.back": "Back to All Projects",
     "nav.viewProject": "View Details",
+    "nav.feedback": "Provide Feedback",
 
     // Home page
     "home.hero.title": "Heights Streetscape Plan",
@@ -59,6 +60,7 @@ const translations: Record<Locale, Translations> = {
     "project.sequenceStart": "Start of sequence",
     "project.sequenceEnd": "End of sequence",
     "project.imageTitle": "Project Image",
+    "project.sitemapTitle": "Project Sitemap",
     "project.imageExpand": "Expand image",
     "project.imageClose": "Close image",
     "project.imageTag.futureRendering": "Future Rendering",
@@ -116,6 +118,7 @@ const translations: Record<Locale, Translations> = {
     "nav.home": "Todos los Proyectos",
     "nav.back": "Volver a Todos los Proyectos",
     "nav.viewProject": "Ver Detalles",
+    "nav.feedback": "Enviar Comentarios",
 
     // Home page
     "home.hero.title": "Plan de Paisaje Urbano de Heights",
@@ -155,6 +158,7 @@ const translations: Record<Locale, Translations> = {
     "project.sequenceStart": "Inicio de la secuencia",
     "project.sequenceEnd": "Fin de la secuencia",
     "project.imageTitle": "Imagen del Proyecto",
+    "project.sitemapTitle": "Mapa del Proyecto",
     "project.imageExpand": "Ampliar imagen",
     "project.imageClose": "Cerrar imagen",
     "project.imageTag.futureRendering": "Representacion Futura",

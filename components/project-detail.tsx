@@ -301,35 +301,58 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
         </div>
       </section>
 
-      {project.image && (
-        <section className="bg-card px-4 py-6">
+      {(project.sitemapImage || project.image) && (
+        <section className="border-b border-border bg-card px-4 py-5 md:py-6">
           <div className="mx-auto max-w-3xl">
-            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-              {t("project.imageTitle")}
-            </h2>
-            <div className="relative aspect-[16/9] overflow-hidden rounded-lg border border-border">
-              <Image
-                src={project.image}
-                alt={imageTagLabel ? `${data.name} - ${imageTagLabel}` : data.name}
-                fill
-                priority
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 768px"
-              />
-              <button
-                type="button"
-                onClick={() => setIsImageOpen(true)}
-                className="absolute inset-0 cursor-zoom-in"
-                aria-label={`${t("project.imageExpand")}: ${data.name}`}
-              />
-              {imageTagLabel && (
-                <div className="absolute left-3 top-3 rounded bg-black/70 px-2.5 py-1 text-xs font-medium text-white">
-                  {imageTagLabel}
+            <div
+              className={`grid gap-4 ${
+                project.sitemapImage && project.image
+                  ? "grid-cols-[96px_minmax(0,1fr)] items-start sm:grid-cols-[130px_minmax(0,1fr)] md:grid-cols-[170px_minmax(0,1fr)]"
+                  : ""
+              }`}
+            >
+              {project.sitemapImage && (
+                <div>
+                  <div className="relative mx-auto h-[220px] w-full max-w-[96px] overflow-hidden rounded-lg border border-border bg-muted/15 p-1.5 sm:h-[260px] sm:max-w-[130px] sm:p-2 md:mx-0 md:h-[300px] md:max-w-[170px]">
+                    <Image
+                      src={project.sitemapImage}
+                      alt={`${data.name} ${t("project.sitemapTitle").toLowerCase()}`}
+                      fill
+                      className="object-contain p-2"
+                      sizes="(max-width: 639px) 96px, (max-width: 767px) 130px, 170px"
+                    />
+                  </div>
                 </div>
               )}
-              <div className="pointer-events-none absolute bottom-3 right-3 rounded-full bg-black/70 p-1.5 text-white">
-                <Expand className="h-4 w-4" />
-              </div>
+
+              {project.image && (
+                <div>
+                  <div className="relative h-[220px] overflow-hidden rounded-lg border border-border sm:h-[260px] md:h-[300px]">
+                    <Image
+                      src={project.image}
+                      alt={imageTagLabel ? `${data.name} - ${imageTagLabel}` : data.name}
+                      fill
+                      priority
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 768px"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setIsImageOpen(true)}
+                      className="absolute inset-0 cursor-zoom-in"
+                      aria-label={`${t("project.imageExpand")}: ${data.name}`}
+                    />
+                    {imageTagLabel && (
+                      <div className="absolute left-3 top-3 rounded bg-black/70 px-2.5 py-1 text-xs font-medium text-white">
+                        {imageTagLabel}
+                      </div>
+                    )}
+                    <div className="pointer-events-none absolute bottom-3 right-3 rounded-full bg-black/70 p-1.5 text-white">
+                      <Expand className="h-4 w-4" />
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </section>

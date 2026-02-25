@@ -24,7 +24,17 @@ export function SiteHeader() {
             </span>
           </div>
         </Link>
-        <LanguageToggle />
+        <div className="flex items-center gap-2">
+          <Link
+            href="https://cityofhoodriver.gov/urban-renewal/heights/"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center rounded-md border border-border bg-background px-2.5 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-accent"
+          >
+            {t("nav.feedback")}
+          </Link>
+          <LanguageToggle />
+        </div>
       </div>
     </header>
   )
