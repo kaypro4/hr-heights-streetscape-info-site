@@ -1,23 +1,29 @@
 "use client"
 
-import { useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { useI18n } from "@/lib/i18n"
-import { projects, type ProjectCategory } from "@/lib/projects"
+import { projects, getCategoryLabel } from "@/lib/projects"
 import { ProjectCard } from "./project-card"
-import { ProjectFilter } from "./project-filter"
-import { MapPin, Users, Shield, Bike } from "lucide-react"
-
-type FilterValue = "all" | ProjectCategory
+import { ListOrdered, Clock3, Layers, CheckCircle2 } from "lucide-react"
 
 export function HomePage() {
-  const { t } = useI18n()
-  const [filter, setFilter] = useState<FilterValue>("all")
-
-  const filteredProjects =
-    filter === "all"
-      ? projects
-      : projects.filter((p) => p.category === filter)
+  const { t, locale } = useI18n()
+  const orderedProjects = [...projects].sort(
+    (a, b) => a.implementationOrder - b.implementationOrder
+  )
+  const implementationDesignProjects = orderedProjects.filter(
+    (p) => p.currentStatus === "implementationDesign"
+  )
+  const conceptualDesignProjects = orderedProjects.filter(
+    (p) => p.currentStatus === "conceptualDesign"
+  )
+  const nextCompletionProject = orderedProjects.find(
+    (p) => p.estimatedCompletion !== "tbd"
+  )
+  const nextCompletionLabel = nextCompletionProject
+    ? t(`completion.${nextCompletionProject.estimatedCompletion}`)
+    : t("completion.tbd")
 
   return (
     <div className="flex flex-col">
@@ -31,8 +37,8 @@ export function HomePage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-slate-900/50" />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/60 via-slate-900/30 to-transparent" />
+        <div className="absolute inset-0 bg-slate-900/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/40 via-slate-900/15 to-transparent" />
         <div className="relative mx-auto max-w-3xl">
           <h1 className="font-serif text-3xl font-bold leading-tight text-balance md:text-4xl">
             {t("home.hero.title")}
@@ -40,49 +46,120 @@ export function HomePage() {
           <p className="mt-3 max-w-2xl text-base leading-relaxed text-primary-foreground/90 text-pretty md:text-lg">
             {t("home.hero.subtitle")}
           </p>
-        </div>
-      </section>
+          <p className="mt-3 max-w-2xl rounded-md border border-white/30 bg-black/45 px-3 py-2 text-xs leading-relaxed text-primary-foreground/95">
+            {t("site.disclaimer")}{" "}
+            <Link
+              href="https://cityofhoodriver.gov/urban-renewal/heights/"
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold underline underline-offset-2"
+            >
+              {t("site.officialLinkLabel")}
+            </Link>
+            .
+          </p>
 
-      {/* Goals strip */}
-      <section className="border-b border-border bg-card px-4 py-6">
-        <div className="mx-auto max-w-3xl">
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            <GoalItem
-              icon={<Users className="h-5 w-5" />}
-              label={t("goal.livable")}
+          <div className="mt-5 grid grid-cols-2 gap-2 md:grid-cols-4">
+            <SnapshotItem
+              icon={<Layers className="h-4 w-4" />}
+              label={t("home.snapshot.totalProjects")}
+              value={String(orderedProjects.length)}
             />
-            <GoalItem
-              icon={<Shield className="h-5 w-5" />}
-              label={t("goal.traffic")}
+            <SnapshotItem
+              icon={<CheckCircle2 className="h-4 w-4" />}
+              label={t("home.snapshot.implementationDesign")}
+              value={String(implementationDesignProjects.length)}
             />
-            <GoalItem
-              icon={<MapPin className="h-5 w-5" />}
-              label={t("goal.identity")}
+            <SnapshotItem
+              icon={<ListOrdered className="h-4 w-4" />}
+              label={t("home.snapshot.conceptualDesign")}
+              value={String(conceptualDesignProjects.length)}
             />
-            <GoalItem
-              icon={<Bike className="h-5 w-5" />}
-              label={t("goal.safe")}
+            <SnapshotItem
+              icon={<Clock3 className="h-4 w-4" />}
+              label={t("home.snapshot.nextCompletion")}
+              value={nextCompletionLabel}
             />
           </div>
         </div>
       </section>
 
-      {/* Projects listing */}
+      {/* Sequence roadmap */}
+      <section className="border-b border-border bg-card px-4 py-8">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="text-xl font-semibold text-foreground">
+            {t("project.sequence")}
+          </h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {t("home.sequence.subtitle")}
+          </p>
+
+          <div className="mt-4 flex flex-col gap-2.5">
+            {orderedProjects.map((project) => (
+              <Link
+                key={project.id}
+                href={`/project/${project.slug}`}
+                className="group flex items-start gap-2.5 rounded-lg border border-border bg-background px-2.5 py-2.5 transition-colors hover:border-primary/40 hover:bg-accent/40 sm:items-center sm:gap-3 sm:px-3"
+              >
+                <div className="relative h-12 w-16 shrink-0 overflow-hidden rounded border border-border bg-muted/40 sm:h-14 sm:w-20">
+                  <Image
+                    src={project.image ?? "/placeholder.svg"}
+                    alt={project[locale].name}
+                    fill
+                    className={project.image ? "object-cover" : "object-contain p-1"}
+                    sizes="(max-width: 640px) 64px, 80px"
+                  />
+                </div>
+                <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-muted text-[11px] font-semibold text-foreground sm:h-7 sm:w-7 sm:text-xs">
+                  {project.implementationOrder}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="line-clamp-2 text-sm font-semibold leading-snug text-foreground group-hover:text-primary sm:line-clamp-1">
+                    {project[locale].name}
+                  </p>
+                  <p className="line-clamp-1 text-xs text-muted-foreground">
+                    {getCategoryLabel(project.category, locale)}
+                  </p>
+                  <div className="mt-1 flex flex-wrap items-center gap-1 sm:hidden">
+                    <span className="rounded-full border border-border px-2 py-0.5 text-[10px] font-medium text-foreground">
+                      {t(`status.${project.currentStatus}`)}
+                    </span>
+                    <span className="text-[10px] text-muted-foreground">
+                      {t(`completion.${project.estimatedCompletion}`)}
+                    </span>
+                  </div>
+                </div>
+                <div className="hidden shrink-0 flex-col items-end gap-1 text-right sm:flex">
+                  <span className="rounded-full border border-border px-2 py-0.5 text-[10px] font-medium text-foreground">
+                    {t(`status.${project.currentStatus}`)}
+                  </span>
+                  <span className="text-[10px] text-muted-foreground">
+                    {t(`completion.${project.estimatedCompletion}`)}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Active projects */}
       <section className="px-4 py-8">
         <div className="mx-auto max-w-3xl">
-          <div className="mb-6">
-            <ProjectFilter active={filter} onChange={setFilter} />
-          </div>
+          <h2 className="text-xl font-semibold text-foreground">
+            {t("home.active.title")}
+          </h2>
+          <p className="mt-1 mb-4 text-sm text-muted-foreground">
+            {t("home.active.subtitle")}
+          </p>
           <div className="grid gap-4 md:grid-cols-2">
-            {filteredProjects.map((project) => (
+            {implementationDesignProjects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
           </div>
-          {filteredProjects.length === 0 && (
+          {implementationDesignProjects.length === 0 && (
             <p className="py-12 text-center text-muted-foreground">
-              {filter === "all"
-                ? "No projects found."
-                : "No projects in this category."}
+              {t("home.active.empty")}
             </p>
           )}
         </div>
@@ -91,14 +168,23 @@ export function HomePage() {
   )
 }
 
-function GoalItem({ icon, label }: { icon: React.ReactNode; label: string }) {
+function SnapshotItem({
+  icon,
+  label,
+  value,
+}: {
+  icon: React.ReactNode
+  label: string
+  value: string
+}) {
   return (
-    <div className="flex flex-col items-center gap-2 text-center">
-      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary text-primary">
+    <div className="rounded-md border border-white/30 bg-black/50 px-2.5 py-2">
+      <div className="flex items-center gap-1.5 text-primary-foreground/90">
         {icon}
+        <span className="text-[11px] leading-tight">{label}</span>
       </div>
-      <span className="text-xs font-medium leading-snug text-foreground">
-        {label}
+      <span className="mt-1 block text-sm font-semibold text-primary-foreground">
+        {value}
       </span>
     </div>
   )
