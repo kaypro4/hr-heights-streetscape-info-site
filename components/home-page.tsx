@@ -3,13 +3,57 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useI18n } from "@/lib/i18n"
-import { projects, getCategoryLabel } from "@/lib/projects"
+import { projects, getCategoryLabel, type Project } from "@/lib/projects"
 import { ProjectCard } from "./project-card"
 import {
   Clock3,
   Layers,
   CheckCircle2,
+  Circle,
+  CircleCheckBig,
+  CircleDotDashed,
 } from "lucide-react"
+
+type PlanStage = "todo" | "inProgress" | "done"
+
+const PLAN_STAGE_STYLE: Record<
+  PlanStage,
+  {
+    line: string
+    rail: string
+    dot: string
+    pill: string
+    Icon: typeof Circle
+  }
+> = {
+  done: {
+    line: "border-l border-emerald-500/45",
+    rail: "bg-emerald-500/80",
+    dot: "bg-emerald-500",
+    pill: "border-emerald-500/35 bg-emerald-500/10 text-emerald-800",
+    Icon: CircleCheckBig,
+  },
+  inProgress: {
+    line: "border-l border-sky-500/55",
+    rail: "bg-sky-500/85",
+    dot: "bg-sky-500",
+    pill: "border-sky-500/35 bg-sky-500/10 text-sky-800",
+    Icon: CircleDotDashed,
+  },
+  todo: {
+    line: "border-l border-slate-400/70",
+    rail: "bg-slate-400/85",
+    dot: "bg-slate-400",
+    pill: "border-slate-300 bg-slate-100 text-slate-700",
+    Icon: Circle,
+  },
+}
+
+function getPlanStage(project: Project, firstActiveOrder: number | null): PlanStage {
+  if (project.currentStatus === "implementationDesign") return "inProgress"
+  if (firstActiveOrder !== null && project.implementationOrder < firstActiveOrder) return "done"
+  return "todo"
+}
 
 export function HomePage() {
   const { t, locale } = useI18n()
@@ -19,6 +63,9 @@ export function HomePage() {
   const implementationDesignProjects = orderedProjects.filter(
     (p) => p.currentStatus === "implementationDesign"
   )
+  const firstActiveOrder = implementationDesignProjects.length
+    ? Math.min(...implementationDesignProjects.map((p) => p.implementationOrder))
+    : null
   const nextCompletionProject = orderedProjects.find(
     (p) => p.estimatedCompletion !== "tbd"
   )
@@ -101,59 +148,70 @@ export function HomePage() {
           </p>
 
           <div className="mt-4 flex flex-col gap-2.5">
-            {orderedProjects.map((project) => (
-              <Link
-                key={project.id}
-                href={`/project/${project.slug}`}
-                className="group flex items-start gap-2.5 rounded-lg border border-border bg-background px-2.5 py-2.5 transition-colors hover:border-primary/40 hover:bg-accent/40 sm:items-center sm:gap-3 sm:px-3"
-              >
-                <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded border border-border bg-muted/40 sm:h-24 sm:w-36">
-                  <Image
-                    src={project.image ?? "/placeholder.svg"}
-                    alt={project[locale].name}
-                    fill
-                    className={project.image ? "object-cover" : "object-contain p-1"}
-                    sizes="(max-width: 640px) 112px, 144px"
-                  />
-                </div>
-                <div className="relative h-20 w-12 shrink-0 overflow-hidden rounded border border-border bg-muted/25 sm:h-24 sm:w-16">
-                  <Image
-                    src={project.sitemapImage ?? "/placeholder.svg"}
-                    alt={`${project[locale].name} ${t("project.sitemapTitle").toLowerCase()}`}
-                    fill
-                    className={project.sitemapImage ? "object-contain p-0.5" : "object-contain p-1"}
-                    sizes="(max-width: 640px) 48px, 64px"
-                  />
-                </div>
-                <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-muted text-[11px] font-semibold text-foreground sm:h-7 sm:w-7 sm:text-xs">
-                  {project.implementationOrder}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <p className="line-clamp-2 text-sm font-semibold leading-snug text-foreground group-hover:text-primary sm:line-clamp-1">
-                    {project[locale].name}
-                  </p>
-                  <p className="line-clamp-1 text-xs text-muted-foreground">
-                    {getCategoryLabel(project.category, locale)}
-                  </p>
-                  <div className="mt-1 flex flex-wrap items-center gap-1 sm:hidden">
-                    <span className="rounded-full border border-border px-2 py-0.5 text-[10px] font-medium text-foreground">
-                      {t(`status.${project.currentStatus}`)}
+            {orderedProjects.map((project) => {
+              const stage = getPlanStage(project, firstActiveOrder)
+              const style = PLAN_STAGE_STYLE[stage]
+              const StageIcon = style.Icon
+
+              return (
+                <Link
+                  key={project.id}
+                  href={`/project/${project.slug}`}
+                  className={`group relative overflow-hidden flex items-start gap-2.5 rounded-lg border border-border bg-background px-2.5 py-2.5 transition-colors hover:border-primary/40 hover:bg-accent/40 sm:items-center sm:gap-3 sm:px-3 ${style.line}`}
+                >
+                  <span className={`absolute inset-y-0 left-0 w-1.5 ${style.rail}`} aria-hidden="true" />
+                  <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded border border-border bg-muted/40 sm:h-24 sm:w-36">
+                    <Image
+                      src={project.image ?? "/placeholder.svg"}
+                      alt={project[locale].name}
+                      fill
+                      className={project.image ? "object-cover" : "object-contain p-1"}
+                      sizes="(max-width: 640px) 112px, 144px"
+                    />
+                  </div>
+                  <div className="relative h-20 w-12 shrink-0 overflow-hidden rounded border border-border bg-muted/25 sm:h-24 sm:w-16">
+                    <Image
+                      src={project.sitemapImage ?? "/placeholder.svg"}
+                      alt={`${project[locale].name} ${t("project.sitemapTitle").toLowerCase()}`}
+                      fill
+                      className={project.sitemapImage ? "object-contain p-0.5" : "object-contain p-1"}
+                      sizes="(max-width: 640px) 48px, 64px"
+                    />
+                  </div>
+                  <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-muted text-[11px] font-semibold text-foreground sm:h-7 sm:w-7 sm:text-xs">
+                    {project.implementationOrder}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="line-clamp-2 text-sm font-semibold leading-snug text-foreground group-hover:text-primary sm:line-clamp-1">
+                      {project[locale].name}
+                    </p>
+                    <p className="line-clamp-1 text-xs text-muted-foreground">
+                      {getCategoryLabel(project.category, locale)}
+                    </p>
+                    <div className="mt-1 flex flex-wrap items-center gap-1 sm:hidden">
+                      <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium ${style.pill}`}>
+                        <StageIcon className="h-2.5 w-2.5" />
+                        {t(`home.sequence.stage.${stage}`)}
+                      </span>
+                      <span className="text-[10px] text-muted-foreground">
+                        {t("project.estimatedCompletion")}:{" "}
+                        {t(`completion.${project.estimatedCompletion}`)}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="hidden shrink-0 flex-col items-end gap-1 text-right sm:flex">
+                    <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium ${style.pill}`}>
+                      <StageIcon className="h-2.5 w-2.5" />
+                      {t(`home.sequence.stage.${stage}`)}
                     </span>
                     <span className="text-[10px] text-muted-foreground">
+                      {t("project.estimatedCompletion")}:{" "}
                       {t(`completion.${project.estimatedCompletion}`)}
                     </span>
                   </div>
-                </div>
-                <div className="hidden shrink-0 flex-col items-end gap-1 text-right sm:flex">
-                  <span className="rounded-full border border-border px-2 py-0.5 text-[10px] font-medium text-foreground">
-                    {t(`status.${project.currentStatus}`)}
-                  </span>
-                  <span className="text-[10px] text-muted-foreground">
-                    {t(`completion.${project.estimatedCompletion}`)}
-                  </span>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              )
+            })}
           </div>
         </div>
       </section>
