@@ -5,7 +5,12 @@ import { useI18n } from "@/lib/i18n"
 import { ExternalLink, MapPin, MessageSquare } from "lucide-react"
 
 export function SiteFooter() {
-  const { t } = useI18n()
+  const { t, locale } = useI18n()
+  const lastUpdated = new Date("2026-02-26")
+  const formattedLastUpdated = new Intl.DateTimeFormat(
+    locale === "es" ? "es-US" : "en-US",
+    { year: "numeric", month: "long", day: "numeric" }
+  ).format(lastUpdated)
 
   return (
     <footer className="border-t border-border bg-card">
@@ -50,6 +55,7 @@ export function SiteFooter() {
         </Link>
         <div className="flex flex-col gap-1 text-xs text-muted-foreground">
           <p>{t("footer.adopted")}</p>
+          <p>{t("footer.updated")}: {formattedLastUpdated}</p>
           <p>{t("footer.contact")}</p>
         </div>
       </div>

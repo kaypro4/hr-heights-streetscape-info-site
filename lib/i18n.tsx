@@ -102,6 +102,7 @@ const translations: Record<Locale, Translations> = {
     "footer.info": "This project is part of the Heights Streetscape Plan, initiated by the City of Hood River and Urban Renewal Agency (URA) to establish a comprehensive plan for improving streets and intersections in the Heights neighborhood.",
     "footer.adopted": "Plan adopted December 2023",
     "footer.contact": "For official information and contacts, use the link above.",
+    "footer.updated": "Site last updated",
 
     // Language
     "lang.toggle": "Espa\u00f1ol",
@@ -201,6 +202,7 @@ const translations: Record<Locale, Translations> = {
     "footer.info": "Este proyecto es parte del Plan de Paisaje Urbano de Heights, iniciado por la Ciudad de Hood River y la Agencia de Renovaci\u00f3n Urbana (URA) para establecer un plan integral de mejora de calles e intersecciones en el vecindario Heights.",
     "footer.adopted": "Plan adoptado en diciembre de 2023",
     "footer.contact": "Para informacion y contactos oficiales, use el enlace de arriba.",
+    "footer.updated": "Sitio actualizado por ultima vez",
 
     // Language
     "lang.toggle": "English",
