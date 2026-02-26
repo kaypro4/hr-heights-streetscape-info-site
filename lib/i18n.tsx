@@ -13,8 +13,8 @@ const translations: Record<Locale, Translations> = {
     "site.title": "Heights Streetscape Plan",
     "site.subtitle": "City of Hood River",
     "site.tagline": "Building Better Streets Together",
-    "site.disclaimer": "This is not the official site. It is an exploratory tool to understand plan projects, status, and sequencing.",
-    "site.officialLinkLabel": "Official City of Hood River Heights page",
+    "site.disclaimer": "This is not the official site. It is an independent, exploratory tool designed to help residents better understand the Heights plan, its projects, current status, and sequencing. For official information, visit the",
+    "site.officialLinkLabel": "City of Hood River's Urban Renewal Agency page",
 
     // Navigation
     "nav.home": "All Projects",
@@ -26,6 +26,7 @@ const translations: Record<Locale, Translations> = {
     "home.hero.title": "Heights Streetscape Plan",
     "home.hero.subtitle": "A comprehensive plan for improving the streets and intersections of the Heights neighborhood in Hood River, Oregon.",
     "home.hero.cta": "Explore Projects",
+    "home.cta.sequence": "Explore Project Sequence",
     "home.snapshot.totalProjects": "Total Projects",
     "home.snapshot.implementationDesign": "In Implementation Design",
     "home.snapshot.conceptualDesign": "In Conceptual Design",
@@ -124,6 +125,7 @@ const translations: Record<Locale, Translations> = {
     "home.hero.title": "Plan de Paisaje Urbano de Heights",
     "home.hero.subtitle": "Un plan integral para mejorar las calles e intersecciones del vecindario Heights en Hood River, Oreg\u00f3n.",
     "home.hero.cta": "Explorar Proyectos",
+    "home.cta.sequence": "Explorar Secuencia de Proyectos",
     "home.snapshot.totalProjects": "Proyectos Totales",
     "home.snapshot.implementationDesign": "En Diseno de Implementacion",
     "home.snapshot.conceptualDesign": "En Diseno Conceptual",
