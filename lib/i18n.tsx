@@ -20,7 +20,7 @@ const translations: Record<Locale, Translations> = {
     "nav.home": "All Projects",
     "nav.back": "Back to All Projects",
     "nav.viewProject": "View Details",
-    "nav.feedback": "Provide Feedback",
+    "nav.feedback": "Plan/Project Feedback",
 
     // Home page
     "home.hero.title": "Heights Streetscape Plan",
@@ -118,7 +118,7 @@ const translations: Record<Locale, Translations> = {
     "nav.home": "Todos los Proyectos",
     "nav.back": "Volver a Todos los Proyectos",
     "nav.viewProject": "Ver Detalles",
-    "nav.feedback": "Enviar Comentarios",
+    "nav.feedback": "Comentarios del Plan/Proyecto",
 
     // Home page
     "home.hero.title": "Plan de Paisaje Urbano de Heights",

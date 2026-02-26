@@ -37,16 +37,18 @@ export function HomePage() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-slate-900/30" />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/40 via-slate-900/15 to-transparent" />
+        <div className="absolute inset-0 bg-white/8" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/30 via-white/10 to-transparent" />
         <div className="relative mx-auto max-w-3xl">
-          <h1 className="font-serif text-3xl font-bold leading-tight text-balance md:text-4xl">
-            {t("home.hero.title")}
-          </h1>
-          <p className="mt-3 max-w-2xl text-base leading-relaxed text-primary-foreground/90 text-pretty md:text-lg">
-            {t("home.hero.subtitle")}
-          </p>
-          <p className="mt-3 max-w-2xl rounded-md border border-white/30 bg-black/45 px-3 py-2 text-xs leading-relaxed text-primary-foreground/95">
+          <div className="inline-block max-w-2xl rounded-lg border border-white/50 bg-white/88 px-4 py-3 text-slate-950 shadow-lg backdrop-blur-sm">
+            <h1 className="font-serif text-3xl font-bold leading-tight text-balance md:text-4xl">
+              {t("home.hero.title")}
+            </h1>
+            <p className="mt-2 text-base leading-relaxed text-slate-900/90 text-pretty md:text-lg">
+              {t("home.hero.subtitle")}
+            </p>
+          </div>
+          <p className="mt-3 max-w-2xl rounded-md border border-white/50 bg-white/85 px-3 py-2 text-xs leading-relaxed text-slate-900">
             {t("site.disclaimer")}{" "}
             <Link
               href="https://cityofhoodriver.gov/urban-renewal/heights/"
@@ -187,12 +189,12 @@ function SnapshotItem({
   value: string
 }) {
   return (
-    <div className="rounded-md border border-white/30 bg-black/50 px-2.5 py-2">
-      <div className="flex items-center gap-1.5 text-primary-foreground/90">
+    <div className="rounded-md border border-white/50 bg-white/85 px-2.5 py-2 shadow-sm">
+      <div className="flex items-center gap-1.5 text-slate-800">
         {icon}
         <span className="text-[11px] leading-tight">{label}</span>
       </div>
-      <span className="mt-1 block text-sm font-semibold text-primary-foreground">
+      <span className="mt-1 block text-sm font-semibold text-slate-950">
         {value}
       </span>
     </div>
