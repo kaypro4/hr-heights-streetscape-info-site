@@ -2,7 +2,6 @@
 
 import { use } from "react"
 import { notFound } from "next/navigation"
-import { AppShell } from "@/components/app-shell"
 import { ProjectDetail } from "@/components/project-detail"
 import { getProjectBySlug } from "@/lib/projects"
 
@@ -20,9 +19,5 @@ export default function ProjectPage({
     notFound()
   }
 
-  return (
-    <AppShell>
-      <ProjectDetail project={project} />
-    </AppShell>
-  )
+  return <ProjectDetail project={project} />
 }

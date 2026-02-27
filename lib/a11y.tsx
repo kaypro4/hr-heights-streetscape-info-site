@@ -6,8 +6,14 @@ import {
   useState,
   useCallback,
   useEffect,
+  useLayoutEffect,
   type ReactNode,
 } from "react"
+
+// useLayoutEffect fires before paint on the client (eliminating the flash),
+// but it doesn't exist on the server — fall back to useEffect there.
+const useSyncEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect
 
 export type TextSize = "normal" | "large" | "larger"
 
@@ -38,8 +44,10 @@ export function A11yProvider({ children }: { children: ReactNode }) {
   const [textSize, setTextSizeState] = useState<TextSize>("normal")
   const [highContrast, setHighContrast] = useState(false)
 
-  // Sync state with whatever the anti-FOUC script already applied
-  useEffect(() => {
+  // Sync state with whatever the anti-FOUC script already applied.
+  // useLayoutEffect fires before paint so the button reflects the correct
+  // active size immediately, without a visible flash on navigation.
+  useSyncEffect(() => {
     try {
       const savedSize =
         (localStorage.getItem(TEXT_SIZE_KEY) as TextSize | null) ?? "normal"
