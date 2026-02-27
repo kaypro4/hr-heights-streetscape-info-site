@@ -48,6 +48,9 @@ export function SiteFooter() {
           <p>{t("footer.updated")}: {formattedLastUpdated}</p>
           <p>{t("footer.contact")}</p>
         </div>
+        <p className="mt-4 border-t border-border pt-4 text-xs text-muted-foreground">
+          {t("footer.accessibility")}
+        </p>
       </div>
     </footer>
   )

@@ -48,7 +48,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Apply stored accessibility preferences before first paint to avoid flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var ts=localStorage.getItem('heights-text-size');var hc=localStorage.getItem('heights-high-contrast');if(ts==='large')document.documentElement.classList.add('text-size-large');if(ts==='larger')document.documentElement.classList.add('text-size-larger');if(hc==='true')document.documentElement.classList.add('high-contrast');}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body
         className={`${inter.variable} ${sourceSerif.variable} font-sans antialiased`}
       >

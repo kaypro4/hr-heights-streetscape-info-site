@@ -112,6 +112,15 @@ const translations: Record<Locale, Translations> = {
     // Language
     "lang.toggle": "Espa\u00f1ol",
     "lang.current": "English",
+
+    // Accessibility
+    "a11y.controls.label": "Accessibility controls",
+    "a11y.textSize.normal": "Normal text size",
+    "a11y.textSize.large": "Large text size",
+    "a11y.textSize.larger": "Largest text size",
+    "a11y.highContrast.enable": "Enable high contrast",
+    "a11y.highContrast.disable": "Disable high contrast",
+    "footer.accessibility": "Accessibility: This site aims to meet WCAG 2.1 Level AA standards. Use the A / A+ / A++ and contrast (\u25d1) controls in the header to adjust text size and display contrast.",
   },
   es: {
     // Header
@@ -217,6 +226,15 @@ const translations: Record<Locale, Translations> = {
     // Language
     "lang.toggle": "English",
     "lang.current": "Espa\u00f1ol",
+
+    // Accessibility
+    "a11y.controls.label": "Controles de accesibilidad",
+    "a11y.textSize.normal": "Tama\u00f1o de texto normal",
+    "a11y.textSize.large": "Texto grande",
+    "a11y.textSize.larger": "Texto m\u00e1s grande",
+    "a11y.highContrast.enable": "Activar alto contraste",
+    "a11y.highContrast.disable": "Desactivar alto contraste",
+    "footer.accessibility": "Accesibilidad: Este sitio aspira a cumplir los est\u00e1ndares WCAG 2.1 Nivel AA. Use los controles A / A+ / A++ y contraste (\u25d1) en el encabezado para ajustar el tama\u00f1o del texto y el contraste.",
   },
 }
 

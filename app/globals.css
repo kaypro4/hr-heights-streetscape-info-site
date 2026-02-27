@@ -124,3 +124,50 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ─── Accessibility: text-size scaling ───────────────────────────────────────
+   All rem-based sizes cascade from <html> font-size automatically.            */
+html.text-size-large  { font-size: 112.5%; } /* ~18 px base */
+html.text-size-larger { font-size: 125%;   } /* ~20 px base */
+
+/* ─── Accessibility: high-contrast mode ──────────────────────────────────────
+   Declared after .dark so this selector wins the cascade regardless of theme. */
+html.high-contrast {
+  --background:           oklch(1 0 0);
+  --foreground:           oklch(0 0 0);
+  --card:                 oklch(1 0 0);
+  --card-foreground:      oklch(0 0 0);
+  --popover:              oklch(1 0 0);
+  --popover-foreground:   oklch(0 0 0);
+  --primary:              oklch(0.22 0.12 250);
+  --primary-foreground:   oklch(1 0 0);
+  --secondary:            oklch(0.91 0.005 240);
+  --secondary-foreground: oklch(0 0 0);
+  --muted:                oklch(0.91 0.005 240);
+  --muted-foreground:     oklch(0.10 0.02 250);
+  --accent:               oklch(0.35 0.12 160);
+  --accent-foreground:    oklch(1 0 0);
+  --border:               oklch(0.12 0.01 250);
+  --input:                oklch(0.85 0.005 240);
+  --ring:                 oklch(0.22 0.12 250);
+}
+
+/* Harden hardcoded Tailwind color utilities that bypass CSS vars */
+html.high-contrast .border-amber-200      { border-color: oklch(0.12 0.01 250); }
+html.high-contrast .bg-amber-50           { background-color: oklch(0.96 0 0); }
+html.high-contrast .text-amber-900        { color: oklch(0 0 0); }
+html.high-contrast .border-emerald-500\/35,
+html.high-contrast .border-sky-500\/35,
+html.high-contrast .border-slate-300      { border-color: oklch(0.12 0.01 250); }
+html.high-contrast .bg-emerald-500\/10    { background-color: oklch(0.92 0 0); }
+html.high-contrast .bg-sky-500\/10        { background-color: oklch(0.90 0 0); }
+html.high-contrast .bg-slate-100          { background-color: oklch(0.93 0 0); }
+html.high-contrast .text-emerald-800,
+html.high-contrast .text-sky-800,
+html.high-contrast .text-slate-700        { color: oklch(0 0 0); }
+html.high-contrast .bg-emerald-500,
+html.high-contrast .bg-emerald-500\/80    { background-color: oklch(0.25 0.10 160); }
+html.high-contrast .bg-sky-500,
+html.high-contrast .bg-sky-500\/85        { background-color: oklch(0.22 0.12 250); }
+html.high-contrast .bg-slate-400,
+html.high-contrast .bg-slate-400\/85      { background-color: oklch(0.35 0.01 250); }
