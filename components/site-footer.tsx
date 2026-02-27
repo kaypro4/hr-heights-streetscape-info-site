@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useI18n } from "@/lib/i18n"
-import { ExternalLink, MapPin, MessageSquare } from "lucide-react"
+import { MapPin } from "lucide-react"
 
 export function SiteFooter() {
   const { t, locale } = useI18n()
@@ -43,16 +43,6 @@ export function SiteFooter() {
           </Link>
           .
         </p>
-        <Link
-          href="https://cityofhoodriver.gov/urban-renewal/heights/"
-          target="_blank"
-          rel="noreferrer"
-          className="mb-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 sm:w-auto"
-        >
-          <MessageSquare className="h-4 w-4" />
-          {t("nav.feedback")}
-          <ExternalLink className="h-4 w-4 opacity-80" />
-        </Link>
         <div className="flex flex-col gap-1 text-xs text-muted-foreground">
           <p>{t("footer.adopted")}</p>
           <p>{t("footer.updated")}: {formattedLastUpdated}</p>

@@ -12,6 +12,8 @@ import {
   Circle,
   CircleCheckBig,
   CircleDotDashed,
+  MessageSquare,
+  ExternalLink,
 } from "lucide-react"
 
 type PlanStage = "todo" | "inProgress" | "done"
@@ -212,6 +214,36 @@ export function HomePage() {
                 </Link>
               )
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Feedback CTA */}
+      <section className="border-b border-border px-4 py-8">
+        <div className="mx-auto max-w-3xl">
+          <div className="flex flex-col gap-3 rounded-xl border border-primary/25 bg-primary/5 px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-start gap-3">
+              <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary">
+                <MessageSquare className="h-4 w-4 text-primary-foreground" />
+              </div>
+              <div>
+                <p className="font-semibold text-foreground">
+                  {t("home.feedback.title")}
+                </p>
+                <p className="mt-0.5 text-sm text-muted-foreground">
+                  {t("home.feedback.body")}
+                </p>
+              </div>
+            </div>
+            <Link
+              href="https://cityofhoodriver.gov/urban-renewal/heights/"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              {t("nav.feedback")}
+              <ExternalLink className="h-3.5 w-3.5 opacity-80" />
+            </Link>
           </div>
         </div>
       </section>
