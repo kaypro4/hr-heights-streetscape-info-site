@@ -27,7 +27,13 @@ import {
   Target,
   Wrench,
   X,
+  PlayCircle,
 } from "lucide-react"
+
+function getYouTubeEmbedUrl(url: string): string | null {
+  const match = url.match(/[?&]v=([^&]+)/)
+  return match ? `https://www.youtube.com/embed/${match[1]}` : null
+}
 
 interface ProjectDetailProps {
   project: Project
@@ -405,6 +411,32 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
               </p>
             </CardContent>
           </Card>
+
+          {/* Video */}
+          {data.youtubeUrl && (() => {
+            const embedUrl = getYouTubeEmbedUrl(data.youtubeUrl)
+            return embedUrl ? (
+              <Card className="pb-0">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-base">
+                    <PlayCircle className="h-4 w-4 text-primary" />
+                    {t("project.video")}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-0">
+                  <div className="relative aspect-video overflow-hidden rounded-b-xl">
+                    <iframe
+                      src={embedUrl}
+                      title={data.name}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="absolute inset-0 h-full w-full"
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+            ) : null
+          })()}
 
           {/* Rationale */}
           <Card>

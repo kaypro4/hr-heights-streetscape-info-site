@@ -38,6 +38,7 @@ export interface Project {
     features: string[]
     goals: string[]
     statusSummary: string
+    youtubeUrl?: string
   }
   es: {
     name: string
@@ -46,6 +47,7 @@ export interface Project {
     features: string[]
     goals: string[]
     statusSummary: string
+    youtubeUrl?: string
   }
 }
 
@@ -84,6 +86,7 @@ export const projects: Project[] = [
         "Safe, Comfortable Streets for People",
       ],
       statusSummary: "TBD",
+      youtubeUrl: "https://www.youtube.com/watch?v=qX3_XSkD6Ms",
     },
     es: {
       name: "Cruces Clave Este/Oeste en la Calle 13",
@@ -102,6 +105,7 @@ export const projects: Project[] = [
         "Calles Seguras y C\u00f3modas para las Personas",
       ],
       statusSummary: "TBD",
+      youtubeUrl: "https://www.youtube.com/watch?v=EpdcgnV4_UE",
     },
   },
   {
