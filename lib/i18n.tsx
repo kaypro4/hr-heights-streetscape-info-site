@@ -52,6 +52,7 @@ const translations: Record<Locale, Translations> = {
     "project.category": "Category",
     "project.location": "Location",
     "project.description": "Description",
+    "project.video": "Project Video",
     "project.rationale": "Why This Project?",
     "project.features": "Key Features",
     "project.goals": "Community Goals Addressed",
@@ -166,6 +167,7 @@ const translations: Record<Locale, Translations> = {
     "project.category": "Categor\u00eda",
     "project.location": "Ubicaci\u00f3n",
     "project.description": "Descripci\u00f3n",
+    "project.video": "Video del Proyecto",
     "project.rationale": "\u00bfPor Qu\u00e9 Este Proyecto?",
     "project.features": "Caracter\u00edsticas Principales",
     "project.goals": "Metas Comunitarias Abordadas",
@@ -255,12 +257,15 @@ function detectBrowserLocale(): Locale {
 }
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(() => {
-    if (typeof window === "undefined") return "en"
+  const [locale, setLocaleState] = useState<Locale>("en")
+
+  useEffect(() => {
     const saved = window.localStorage.getItem(LOCALE_STORAGE_KEY)
-    if (saved === "en" || saved === "es") return saved
-    return detectBrowserLocale()
-  })
+    const resolved: Locale =
+      saved === "en" || saved === "es" ? saved : detectBrowserLocale()
+    setLocaleState(resolved)
+    document.documentElement.lang = resolved
+  }, [])
 
   useEffect(() => {
     document.documentElement.lang = locale
