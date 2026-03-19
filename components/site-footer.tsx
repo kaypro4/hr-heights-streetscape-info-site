@@ -45,7 +45,7 @@ export function SiteFooter() {
         </p>
         <div className="flex flex-col gap-1 text-xs text-muted-foreground">
           <p>{t("footer.adopted")}</p>
-          <p>{t("footer.updated")}: {formattedLastUpdated}</p>
+          <p suppressHydrationWarning>{t("footer.updated")}: {formattedLastUpdated}</p>
           <p>{t("footer.contact")}</p>
         </div>
         <p className="mt-4 border-t border-border pt-4 text-xs text-muted-foreground">
