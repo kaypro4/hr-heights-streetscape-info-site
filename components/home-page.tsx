@@ -123,22 +123,6 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Disclaimer strip */}
-      <section className="border-b border-border px-4 pb-3">
-        <div className="mx-auto max-w-3xl text-xs leading-relaxed text-muted-foreground">
-          {t("site.disclaimer")}{" "}
-          <Link
-            href="https://cityofhoodriver.gov/urban-renewal/heights/"
-            target="_blank"
-            rel="noreferrer"
-            className="font-semibold underline underline-offset-2"
-          >
-            {t("site.officialLinkLabel")}
-          </Link>
-          .
-        </div>
-      </section>
-
       {/* Sequence roadmap */}
       <section id="project-sequence" className="border-b border-border bg-card px-4 py-8 scroll-mt-20">
         <div className="mx-auto max-w-3xl">

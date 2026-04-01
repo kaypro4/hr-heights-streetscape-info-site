@@ -13,14 +13,14 @@ const translations: Record<Locale, Translations> = {
     "site.title": "Heights Streetscape Plan",
     "site.subtitle": "City of Hood River",
     "site.tagline": "Building Better Streets Together",
-    "site.disclaimer": "This is not the official site. It is an independent, exploratory tool designed to help residents better understand the Heights plan, its projects, current status, and sequencing. For official information, visit the",
-    "site.officialLinkLabel": "City of Hood River's Urban Renewal Agency page",
-
     // Navigation
     "nav.home": "All Projects",
     "nav.back": "Back to All Projects",
     "nav.viewProject": "View Details",
     "nav.feedback": "Plan/Project Feedback",
+    "nav.cityBar": "City of Hood River",
+    "nav.cityBarLink": "Main City Website",
+    "nav.cityHeights": "Heights Streetscape Main Site",
 
     // Home page
     "home.hero.title": "Heights Streetscape Plan",
@@ -105,9 +105,9 @@ const translations: Record<Locale, Translations> = {
     "completion.tbd": "TBD",
 
     // Footer
-    "footer.info": "This project is part of the Heights Streetscape Plan, initiated by the City of Hood River and Urban Renewal Agency (URA) to establish a comprehensive plan for improving streets and intersections in the Heights neighborhood.",
+    "footer.info": "An official tool of the City of Hood River Urban Renewal Agency (URA), part of the Heights Streetscape Plan to establish a comprehensive plan for improving streets and intersections in the Heights neighborhood.",
     "footer.adopted": "Plan adopted December 2023",
-    "footer.contact": "For official information and contacts, use the link above.",
+    "footer.officialPage": "Official Heights Program page",
     "footer.updated": "Site last updated",
 
     // Language
@@ -128,14 +128,14 @@ const translations: Record<Locale, Translations> = {
     "site.title": "Plan de Paisaje Urbano de Heights",
     "site.subtitle": "Ciudad de Hood River",
     "site.tagline": "Construyendo Mejores Calles Juntos",
-    "site.disclaimer": "Este no es el sitio oficial. Es una herramienta exploratoria para comprender los proyectos del plan, su estado y secuencia.",
-    "site.officialLinkLabel": "Pagina oficial de Heights de la Ciudad de Hood River",
-
     // Navigation
     "nav.home": "Todos los Proyectos",
     "nav.back": "Volver a Todos los Proyectos",
     "nav.viewProject": "Ver Detalles",
     "nav.feedback": "Comentarios del Plan/Proyecto",
+    "nav.cityBar": "Ciudad de Hood River",
+    "nav.cityBarLink": "Sitio Web",
+    "nav.cityHeights": "Sitio Principal del Distrito Heights",
 
     // Home page
     "home.hero.title": "Plan de Paisaje Urbano de Heights",
@@ -220,9 +220,9 @@ const translations: Record<Locale, Translations> = {
     "completion.tbd": "Por Definir",
 
     // Footer
-    "footer.info": "Este proyecto es parte del Plan de Paisaje Urbano de Heights, iniciado por la Ciudad de Hood River y la Agencia de Renovaci\u00f3n Urbana (URA) para establecer un plan integral de mejora de calles e intersecciones en el vecindario Heights.",
+    "footer.info": "Una herramienta oficial de la Agencia de Renovación Urbana (URA) de la Ciudad de Hood River, parte del Plan de Paisaje Urbano de Heights para establecer un plan integral de mejora de calles e intersecciones en el vecindario Heights.",
     "footer.adopted": "Plan adoptado en diciembre de 2023",
-    "footer.contact": "Para informacion y contactos oficiales, use el enlace de arriba.",
+    "footer.officialPage": "Página oficial del Programa Heights",
     "footer.updated": "Sitio actualizado por ultima vez",
 
     // Language

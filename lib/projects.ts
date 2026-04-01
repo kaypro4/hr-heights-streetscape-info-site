@@ -85,8 +85,7 @@ export const projects: Project[] = [
         "Calm Traffic & Improve Intersections",
         "Safe, Comfortable Streets for People",
       ],
-      statusSummary: "TBD",
-      youtubeUrl: "https://www.youtube.com/watch?v=qX3_XSkD6Ms",
+      statusSummary: "TBD"
     },
     es: {
       name: "Cruces Clave Este/Oeste en la Calle 13",
@@ -104,8 +103,7 @@ export const projects: Project[] = [
         "Calmar el Tr\u00e1fico y Mejorar Intersecciones",
         "Calles Seguras y C\u00f3modas para las Personas",
       ],
-      statusSummary: "TBD",
-      youtubeUrl: "https://www.youtube.com/watch?v=EpdcgnV4_UE",
+      statusSummary: "TBD"
     },
   },
   {

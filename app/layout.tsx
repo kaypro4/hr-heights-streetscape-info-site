@@ -1,11 +1,17 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Source_Serif_4 } from 'next/font/google'
+import { Inter, Montserrat, Source_Serif_4 } from 'next/font/google'
 import { AppShell } from '@/components/app-shell'
 import './globals.css'
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
+})
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['400', '600'],
+  variable: '--font-montserrat',
 })
 
 const sourceSerif = Source_Serif_4({
@@ -19,25 +25,15 @@ export const metadata: Metadata = {
     'Explore the Heights Streetscape Plan for the City of Hood River. Learn about upcoming street improvements, bike paths, pedestrian safety, and community projects in the Heights neighborhood.',
   icons: {
     icon: [
-      {
-        url: '/placeholder-logo.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/placeholder-logo.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/placeholder-logo.svg',
-        type: 'image/svg+xml',
-      },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon.ico' },
     ],
-    apple: '/placeholder-logo.png',
   },
 }
 
 export const viewport: Viewport = {
-  themeColor: '#1e3a5f',
+  themeColor: '#232c39',
   width: 'device-width',
   initialScale: 1,
 }
@@ -58,7 +54,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${sourceSerif.variable} font-sans antialiased`}
+        className={`${inter.variable} ${montserrat.variable} ${sourceSerif.variable} font-sans antialiased`}
       >
         <AppShell>{children}</AppShell>
       </body>
